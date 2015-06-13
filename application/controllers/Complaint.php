@@ -97,13 +97,25 @@ class Complaint extends CI_Controller{
 		$this->load->model('Outer_model');
 		$result=$this->Outer_model->validate_user($data);
 		if ($result == 'student')
-			echo 'student';
-		else if ($result == 'caretaker')
-			echo 'caretaker';
-		else if ($result == 'warden')
-			echo 'warden';
+			echo 'student/home/';
+		else if ($result == 'caretaker' || $result == 'warden')
+			echo 'admin/home/';
 		else echo 0;
 	}		
+	
+	public function forgotPassword($page='forgot'){
+		
+		
+	}
+	
+	public function logout(){
+		session_start();
+		if (!isset($_SESSION['id']))
+			header('location: http://localhost/ci/index.php/complaint/home/');
+		session_unset();
+		session_destroy();
+		header('location: http://localhost/ci/index.php/complaint/home/');		
+	}
 
 	
 }

@@ -14,14 +14,14 @@ class Outer_model extends CI_Model {
 			{
 				$row = $result->row();
 				$_SESSION['id'] = session_id();
-				$query = 'select fname, user_type, regno, email, roomno from registration where registration.email="' . $row->email . '"';
+				$query = 'select * from registration where registration.email="' . $data['email'] . '"';
 				$res = $this->db->query($query);
-				$row = $res->row();
-				$_SESSION['email'] = $row->email;
-				$_SESSION['name'] = $row->fname;
-				$_SESSION['user_type'] = $row->user_type;
-				$_SESSION['roll'] = $row->regno;
-				return $row->user_type;
+				$row1 = $res->row();
+				$_SESSION['email'] = $data['email'];
+				$_SESSION['name'] = $row1->fname;
+				$_SESSION['user_type'] = $row1->user_type;
+				$_SESSION['roll'] = $row1->regno;
+				return $row1->user_type;
 			}
 			else return 0;
 		}		

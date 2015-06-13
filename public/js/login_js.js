@@ -45,8 +45,8 @@ function val()
             success: function (data) {
 				if(data!="0")
 				{
-					window.alert("login successful");
-					//window.location.assign(data);
+					//window.alert("login successful");
+					window.location.assign('http://localhost/ci/index.php/'+data);
 				}
 				else
 				{

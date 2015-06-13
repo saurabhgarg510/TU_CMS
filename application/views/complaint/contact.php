@@ -24,8 +24,6 @@ function spam_alert(){
   					 if (isset($_SESSION['stmt'])) {
 						//echo $_COOKIE['count'];
 						$c = $_COOKIE['count'];
-						$c= $c+1;
-						$c=0;
 						setcookie('count', $c , time() + (3600), "/");
 						if($c > 2){ ?>
 							<script type="text/javascript">

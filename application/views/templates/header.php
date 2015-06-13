@@ -23,7 +23,6 @@ if (isset($_SESSION['id'])) {
                 <link rel="stylesheet" href="../../../public/css/style-wide.css" />
         </head>
 <body>
-<header>
 <header id="header" class="<?php if(isset($title)){ if($title=='Home') echo "alt"; else echo "skel-layers-fixed";}?>">
             <h1 style="font-size:30px "><a href="">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
             <nav id="nav">      <h1 style="font-size:30px "><a href="">HOSTEL-J</a><a href="login.php">Sign In</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>

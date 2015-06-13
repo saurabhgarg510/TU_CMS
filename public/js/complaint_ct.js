@@ -1,10 +1,7 @@
 // JavaScript Document
 function show(id)
 {
-	
-	document.getElementById("popup").style.display="block";
-	document.getElementById("shadow").style.display="block";
-	$.post('popup.php', {send : id}, function(result){ 
+	$.post('http://localhost/ci/index.php/admin/popup/', {send : id}, function(result){ 
 	var data = result.split(",");
 	document.getElementById("ajaxdata").innerHTML = "<td>" +  data[0] + "</td>";
 	for(i=1; i<7; i++)
@@ -12,16 +9,16 @@ function show(id)
 		if(i==5)
 		{
 			if(data[i]=='Pending')
-	document.getElementById("ajaxdata").innerHTML += "<td><b style='color:blue'>" +  data[i] + "</b></td>";	
-	else if(data[i]=='Complete')
-	document.getElementById("ajaxdata").innerHTML += "<td><b style='color:green' >" +  data[i] + "</b></td>";
-	else if(data[i]=='Urgent')
-	document.getElementById("ajaxdata").innerHTML += "<td><b style='color:red'>" +  data[i] + "</b></td>";
+				document.getElementById("ajaxdata").innerHTML += "<td><b style='color:blue'>" +  data[i] + "</b></td>";	
+			else if(data[i]=='Complete')
+				document.getElementById("ajaxdata").innerHTML += "<td><b style='color:green' >" +  data[i] + "</b></td>";
+			else if(data[i]=='Urgent')
+				document.getElementById("ajaxdata").innerHTML += "<td><b style='color:red'>" +  data[i] + "</b></td>";
 			else
-			document.getElementById("ajaxdata").innerHTML += "<td>" +  data[i] + "</td>";
+				document.getElementById("ajaxdata").innerHTML += "<td>" +  data[i] + "</td>";
 		}
 		else
-		document.getElementById("ajaxdata").innerHTML += "<td>" +  data[i] + "</td>";
+			document.getElementById("ajaxdata").innerHTML += "<td>" +  data[i] + "</td>";
 	}
 	//var date = data[7];
 	//document.getElementById("complete").innerHTML = date;
@@ -31,24 +28,16 @@ function show(id)
 	else document.getElementById("getremark").innerHTML = "<tr><td>No remarks added yet...</td></tr>";
 	for(i=10; i< len; i += 3)
 	document.getElementById("getremark").innerHTML += "<tr> <td><b>" +  data[i] + "</b> ( " +  data[i+1] + " )</td> <td>" +  data[i+2] + "</td> </tr>";
-	
-	
 	});
-
 }
-function hide()
-{
 
-	document.getElementById("popup").style.display="none";
-	document.getElementById("shadow").style.display="none";
-}
 function update(){
 	var re=document.getElementById("remark").value;
 	var expdate = document.getElementById("complete").value;
 	var stat=document.getElementById("status").selectedIndex;
 	var stats=document.getElementById("status")[stat].value;
-	$.post('update_remark.php', {remark : re, status: stats, cdate : expdate}, function(result){
-	window.location.assign("warden.php");	
+	$.post('http://localhost/ci/index.php/admin/updateRemark/', {remark : re, status: stats, cdate : expdate}, function(result){
+	window.location.assign("http://localhost/ci/index.php/admin/home/");	
 	
 	});	
 

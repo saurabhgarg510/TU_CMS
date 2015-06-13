@@ -7,7 +7,7 @@
                 <!--<p></p>-->
             </header>
             <div class="box">
-                <form method="post" action="home.php">
+                <form method="post" action="">
                     <div class="row uniform half">
                         <div class="12u">
                             <input type="text" name="username" id="username" placeholder="Email" required/>
@@ -32,6 +32,7 @@
                             <ul class="actions align-center">
 
                                 <li><a><input type="button" id="signin" onClick="val()" value="Sign In" /></a></li>
+                                <li><a href="http://localhost/ci/index.php/complaint/forgotPassword/">Forgot Password?</a></li>
                             </ul>
                         </div>
                     </div>
