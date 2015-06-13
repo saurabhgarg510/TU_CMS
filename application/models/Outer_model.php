@@ -41,5 +41,17 @@ class Outer_model extends CI_Model {
 				$headers="From:".$_POST['name']."<".$_POST['email'].">";
 				mail($to,$subject,$message,$headers);*/
 		}
+		
+		function email_exists($email){
+			$result=$this->db->query("select fname,email from registration where email = '".$email."'");
+			if($result->num_rows() >=1){
+				return $result->row()->fname;
+			}
+			else return FALSE;
+		}
+		
+		function updatePass($email, $pass){
+			$this->db->query("update login set pass = '".$pass."' where email = '".$email."'");
+		}
 }
 ?>
