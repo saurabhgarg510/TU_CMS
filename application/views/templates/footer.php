@@ -1,9 +1,10 @@
 <footer id="footer" style="bottom:0px">
-            <ul class="copyright" style="color:black">
-                <li><a href="/instructions">Instructions</a></li>
-                <li><a href="/contact">Contact us</a></li><li><a href="/developers">Developers</a></li>
-            </ul>
-        </footer>
+    <ul class="copyright" style="color:black">
+        <li><a href="<?php echo base_url(); ?>index.php/complaint/instructions">Instructions</a></li>
+        <li><a href="<?php echo base_url(); ?>index.php/complaint/contact">Contact us</a></li>
+        <li><a href="<?php echo base_url(); ?>index.php/complaint/developers">Developers</a></li>
+    </ul>
+</footer>
 
-    </body>
+</body>
 </html>

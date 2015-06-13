@@ -39,6 +39,5 @@ function update(){
 	$.post('http://localhost/ci/index.php/admin/updateRemark/', {remark : re, status: stats, cdate : expdate}, function(result){
 	window.location.assign("http://localhost/ci/index.php/admin/home/");	
 	
-	});	
-
+	});
 }
