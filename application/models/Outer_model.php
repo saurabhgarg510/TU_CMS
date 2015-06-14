@@ -7,10 +7,9 @@ class Outer_model extends CI_Model {
     }
 
     public function validate_user($data) {
-        $query = 'select * from login where email="' . $data['email'] . '" and pass="' . $data['password'] . '"';
+        $query = "select * from login where email='" . $data['email'] . "' and pass='" . $data['password'] . "'";
         $result = $this->db->query($query);
         if ($result->num_rows() > 0) {
-            $row = $result->row();
             $_SESSION['id'] = session_id();
             $query = 'select * from registration where registration.email="' . $data['email'] . '"';
             $res = $this->db->query($query);
@@ -21,8 +20,8 @@ class Outer_model extends CI_Model {
             $_SESSION['roll'] = $row1->regno;
             $_SESSION['room'] = $row1->roomno;
             return $row1->user_type;
-        } else
-            return 0;
+        } 
+        else return '0';
     }
 
     public function contact($data) {

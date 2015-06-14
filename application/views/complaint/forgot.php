@@ -9,8 +9,10 @@
                         echo $_SESSION['error'] . '<br>';
                     ?>
                     <form action="<?php echo base_url(); ?>index.php/complaint/checkEmail" method="post">
-                        <input type="email" name="email" required placeholder="Enter your registered email..."><br>
-                        <input type="submit" class="special" value="Reset Password">
+                        <div class="row uniform">
+                            <div class="8u"><input type="email" name="email" required placeholder="Enter your registered email..."></div>
+                            <div class="4u"><input type="submit" class="special" value="Reset Password"></div>
+                        </div>
                     </form>
 
                     <?php

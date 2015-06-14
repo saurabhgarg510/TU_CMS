@@ -7,7 +7,7 @@
         <!--<p></p>-->
     </header>
     <div class="box">
-        <form method="post" action="">
+        <form method="post">
             <div class="row uniform half">
                 <div class="12u">
                     <input type="text" name="username" id="username" placeholder="Email" required/>
@@ -30,9 +30,8 @@
             <div class="row uniform">
                 <div class="12u">
                     <ul class="actions align-center">
-
-                        <li><a><input type="button" id="signin" onClick="val()" value="Sign In" /></a></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/complaint/forgotPassword">Forgot Password?</a></li>
+                        <li><a><input type="button" class="special" id="signin" onClick="val()" value="Sign In" /></a></li>
+                        <li><a class="button special" href="<?php echo base_url(); ?>index.php/complaint/forgotPassword">Forgot Password?</a></li>
                     </ul>
                 </div>
             </div>

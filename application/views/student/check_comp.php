@@ -73,6 +73,6 @@ if ($complaint['count'] > 0) {
 }
 else {
     unset($go);
-    header('location: http://localhost/ci/index.php/student/addComp');
+    header('location: ' . base_url() . 'index.php/student/addComp');
 }
 ?>

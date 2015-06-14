@@ -97,7 +97,7 @@ class Complaint extends CI_Controller {
         $this->Outer_model->contact($data);
         $_SESSION['stmt'] = TRUE;
         $_SESSION['nm'] = $data['name'];
-        redirect('http://localhost/ci/index.php/complaint/contact');
+        redirect(base_url() . 'index.php/complaint/contact');
     }
 
     public function check_user() {
@@ -145,7 +145,7 @@ class Complaint extends CI_Controller {
             $error = 'Please enter a valid email...';
         }
         $_SESSION['error'] = $error;
-        redirect('http://localhost/ci/index.php/complaint/forgotPassword');
+        redirect(base_url() . 'index.php/complaint/forgotPassword');
     }
 
     function send_reset_password_email($email, $name) {
@@ -156,7 +156,7 @@ class Complaint extends CI_Controller {
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
             'smtp_user' => 'imcool.saurabh@gmail.com', // change it to yours
-            'smtp_pass' => '$mart90415', // change it to yours
+            'smtp_pass' => '', // change it to yours
             'mailtype' => 'html',
             'charset' => 'iso-8859-1',
             'wordwrap' => TRUE
@@ -167,7 +167,7 @@ class Complaint extends CI_Controller {
 		<p>Dear ' . $name . ', <br><br>
 		To reset your onlinehostelj.in password, <a href="<?php echo base_url(); ?>index.php/complaint/resetPassword/' . $email . '/' . $email_code . '/">click here</a>. <br><br>
 		If you are not able to view the link above, copy and paste into your address bar: 
-		http://localhost/ci/index.php/complaint/resetPassword/' . $email . '/' . $email_code . '/ <br><br>
+		' . base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code . '/ <br><br>
 		If this was not you, kindly ignore this email.<br><br>
 		Thanks,<br>
 		Developer
@@ -228,10 +228,10 @@ class Complaint extends CI_Controller {
     public function logout() {
         session_start();
         if (!isset($_SESSION['id']))
-            header('location: http://localhost/ci/index.php/complaint/home');
+            header('location: ' . base_url() . 'index.php/complaint/home');
         session_unset();
         session_destroy();
-        header('location: http://localhost/ci/index.php/complaint/home');
+        header('location: ' . base_url() . 'index.php/complaint/home');
     }
 
 }
