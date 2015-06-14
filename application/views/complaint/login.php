@@ -32,7 +32,7 @@
                     <ul class="actions align-center">
 
                         <li><a><input type="button" id="signin" onClick="val()" value="Sign In" /></a></li>
-                        <li><a href="<?php echo base_url(); ?>index.php/complaint/forgotPassword/">Forgot Password?</a></li>
+                        <li><a href="<?php echo base_url(); ?>index.php/complaint/forgotPassword">Forgot Password?</a></li>
                     </ul>
                 </div>
             </div>

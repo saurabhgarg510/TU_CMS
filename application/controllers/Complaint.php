@@ -1,6 +1,25 @@
 <?php
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Complaint extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        session_start();
+    }
+
+    function checkSession() {
+        if (isset($_SESSION['user_type'])) {
+            if ($_SESSION['user_type'] == 'student') {
+                header('location: ' . base_url() . 'index.php/student/home');
+                die();
+            } else if ($_SESSION['user_type'] == 'caretaker' || $_SESSION['user_type'] == 'warden') {
+                header('location: ' . base_url() . 'index.php/admin/home');
+                die();
+            }
+        }
+    }
 
     public function developers($page = 'developers') {
         if (!file_exists(APPPATH . '/views/complaint/' . $page . '.php')) {
@@ -31,7 +50,7 @@ class Complaint extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-
+        $this->checkSession();
         $data['title'] = "Home";
         $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
@@ -43,7 +62,7 @@ class Complaint extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-
+        $this->checkSession();
         $data['title'] = 'Sign In';
         $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
@@ -54,7 +73,6 @@ class Complaint extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        session_start();
         $data['title'] = ucfirst($page . ' Us'); // Capitalize the first letter
         $this->load->view('templates/header_static', $data);
         $this->load->view('complaint/' . $page);
@@ -63,7 +81,6 @@ class Complaint extends CI_Controller {
     }
 
     public function string_validate($str) {
-
         $str = filter_var($str, FILTER_SANITIZE_STRING);
         $str1 = str_replace("%", "p", "$str");
         /* @var $mysqli type */
@@ -78,10 +95,9 @@ class Complaint extends CI_Controller {
         $data['message'] = $this->string_validate($data['message']);
         $this->load->model('Outer_model');
         $this->Outer_model->contact($data);
-        session_start();
         $_SESSION['stmt'] = TRUE;
         $_SESSION['nm'] = $data['name'];
-        redirect('http://localhost/ci/index.php/complaint/contact/');
+        redirect('http://localhost/ci/index.php/complaint/contact');
     }
 
     public function check_user() {
@@ -89,13 +105,12 @@ class Complaint extends CI_Controller {
         $data['password'] = $this->input->post('password');
         $salt = "thispasswordcannotbehacked";
         $data['password'] = hash('sha256', $salt . $data['password']);
-        session_start();
         $this->load->model('Outer_model');
         $result = $this->Outer_model->validate_user($data);
         if ($result == 'student')
-            echo 'student/home/';
+            echo 'student/home';
         else if ($result == 'caretaker' || $result == 'warden')
-            echo 'admin/home/';
+            echo 'admin/home';
         else
             echo 0;
     }
@@ -105,7 +120,7 @@ class Complaint extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        session_start();
+        $this->checkSession();
         $data['title'] = ucfirst($page . ' Password'); // Capitalize the first letter
         $this->load->view('templates/header_static', $data);
         $this->load->view('complaint/' . $page);
@@ -130,7 +145,7 @@ class Complaint extends CI_Controller {
             $error = 'Please enter a valid email...';
         }
         $_SESSION['error'] = $error;
-        redirect('http://localhost/ci/index.php/complaint/forgotPassword/');
+        redirect('http://localhost/ci/index.php/complaint/forgotPassword');
     }
 
     function send_reset_password_email($email, $name) {
@@ -174,6 +189,7 @@ class Complaint extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
+        $this->checkSession();
         $this->load->model('Outer_model');
         $exists = $this->Outer_model->email_exists($email);
         if ($exists) {
@@ -186,6 +202,8 @@ class Complaint extends CI_Controller {
                 $this->load->view('complaint/reset', $data);
             }
         } else /*         * REDIRECT to some error page* 
+
+         
             */;
     }
 
@@ -202,16 +220,18 @@ class Complaint extends CI_Controller {
                 $this->Outer_model->updatePass($email, $pass);
             }
         } else /*         * REDIRECT to some error page* 
+
+         
             */;
     }
 
     public function logout() {
         session_start();
         if (!isset($_SESSION['id']))
-            header('location: http://localhost/ci/index.php/complaint/home/');
+            header('location: http://localhost/ci/index.php/complaint/home');
         session_unset();
         session_destroy();
-        header('location: http://localhost/ci/index.php/complaint/home/');
+        header('location: http://localhost/ci/index.php/complaint/home');
     }
 
 }

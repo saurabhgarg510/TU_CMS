@@ -2,7 +2,7 @@
     function passwordChanged(id) {
         var strength = document.getElementById(id);
         var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&*]).*$", "g");
-        var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
         var enoughRegex = new RegExp("(?=.{6,}).*", "g");
         var pwd = document.getElementById(id);
         if (strongRegex.test(pwd.value)) {
@@ -49,7 +49,7 @@
                 <div class="12u">
                     <input type="password" name="pass" id="pass" placeholder="Enter new password" maxlength="20"  onkeyup="return passwordChanged('pass');"  required />
                 </div>
-                <span class="error"><?php if(isset($_SESSION['passerr'])) echo $_SESSION['passerr']; ?> Password : atleast 1 number, 1 special character, 1 lowercase alphabet and minimum length is 8</span>
+                <span class="error"><?php if(isset($_SESSION['passerr'])) echo $_SESSION['passerr']; ?> Password : atleast 1 number, 1 lowercase alphabet and minimum length is 6</span>
             </div>
             <div class="row uniform half">
                 <div class="12u">

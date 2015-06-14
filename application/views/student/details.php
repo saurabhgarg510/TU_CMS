@@ -10,8 +10,8 @@
                     //else { header('location: http://localhost/ci/index.php/student/home/'); die(); }
                     ?></h2>
                 <ul class="actions" style="text-align:center">
-                    <li><a href="<?php echo base_url(); ?>index.php/student/home/" class="special">Click here </a> to go back</li>
-                    <li><a href="<?php echo base_url(); ?>index.php/student/status/" class="special">Click here </a> to view previous complaints</li>
+                    <li><a href="<?php echo base_url(); ?>index.php/student/home" class="special">Click here </a> to go back</li>
+                    <li><a href="<?php echo base_url(); ?>index.php/student/status" class="special">Click here </a> to view previous complaints</li>
                 </ul>
             </center>
         </div>

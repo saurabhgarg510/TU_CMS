@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller {
 
@@ -60,7 +61,7 @@ class Student extends CI_Controller {
 
         $data['type'] = $this->input->post('type');
         if ($data['type'] === '')
-            redirect('http://localhost/ci/index.php/student/home/');
+            redirect('http://localhost/ci/index.php/student/home');
         $data['message'] = $this->input->post('message');
         $data['level'] = $this->input->post('level');
         $data['go'] = $this->input->post('go');
@@ -76,7 +77,6 @@ class Student extends CI_Controller {
         $data['complaint'] = $this->Student_model->getNumComp($data);
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
-
         $this->load->view('templates/user_header', $data);
         $this->load->view('student/' . $page, $data);
         $this->load->view('templates/footer');
@@ -93,7 +93,7 @@ class Student extends CI_Controller {
     }
 
     function valid_pass($candidate) {
-        if (!preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\d])(?=\S*[\W])\S*$', $candidate))
+        if (!preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
             return FALSE;
         return TRUE;
     }
@@ -194,7 +194,7 @@ class Student extends CI_Controller {
                     $this->load->model('Student_model');
                     $this->Student_model->updatePro($pass);
                 }
-                redirect('http://localhost/ci/index.php/student/profile/');
+                redirect('http://localhost/ci/index.php/student/profile');
             }
         }
     }

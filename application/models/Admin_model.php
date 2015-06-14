@@ -82,19 +82,14 @@ class Admin_model extends CI_Model {
             $data['user_type'] = $row['user_type'];
             $data['time'] = $row['time'];
             $data['remark'] = $row['remark'];
-            array_push($details, $data);
-            return $details;
+            array_push($details, $data);            
             //format_date($row['time']) . "(" . date("H:i:s", strtotime($row['time'])) . ")" . "," . $row['remark'];
         }
+        return $details;
     }
 
-    function updateRemark($remark) {
-        $user = $_SESSION['compid'];
-        if ($remark != '') {
-            $remark = str_replace(",", ".", $_POST['remark']);
-            $sql = "insert into remarks(remark,comp_id,user_type,time) values('" . $remark . "','" . ucwords($user) . "' ,'" . $_SESSION['user_type'] . "','" . date('Y-m-d H:i:s') . "')";
-            $this->db->query($sql);
-        }
+    function addRemark($sql) {
+        $this->db->query($sql);
     }
 
 }

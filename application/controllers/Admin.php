@@ -1,9 +1,12 @@
 <?php
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Admin extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('Admin_model');
         session_start();
         if (!isset($_SESSION['id']))
             header('location:home');
@@ -39,8 +42,13 @@ class Admin extends CI_Controller {
     function string_validate($str) {
         $str = filter_var($str, FILTER_SANITIZE_STRING);
         $str1 = str_replace("%", "p", "$str");
-        /* @var $mysqli type */
         return $this->db->escape($str1);
+    }
+    
+    function valid_pass($candidate) {
+        if (!preg_match_all('$\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
+            return FALSE;
+        return TRUE;
     }
 
     public function home($page = 'warden') {
@@ -89,12 +97,9 @@ class Admin extends CI_Controller {
         } else if ($sql == 'select * from complaints where ') {
             $sql = 'select * from complaints  where status <>"Complete" ';
         }
-        //$sql1=str_replace("*","count(comp_id)",$sql);
-        $this->load->model('Admin_model');
         //echo $sql;
         $data['row'] = $this->Admin_model->filteredContent($sql);
         //print_r($data);
-
         $data['category'] = $this->Admin_model->getCategory();
         $title['title'] = ucfirst('View Complaints'); // Capitalize the first letter
         $this->load->view('templates/user_header', $title);
@@ -108,12 +113,11 @@ class Admin extends CI_Controller {
         $_SESSION['fstat'] = $this->input->get('fstat');
         $_SESSION['f_sdate'] = $this->input->get('f_sdate');
         $_SESSION['f_edate'] = $this->input->get('f_edate');
-        redirect('http://localhost/ci/index.php/admin/home/');
+        redirect('http://localhost/ci/index.php/admin/home');
     }
 
     public function popup() {
         $_SESSION['compid'] = $this->input->post('send');
-        $this->load->model('Admin_model');
         $row = $this->Admin_model->popData();
         echo $row['name'] . "," . $row['comp_id'] . "," . $row['category'] . "," . $row['roomno'] . "," . $this->format_date($row['comp_date']) . "(" . date("H:i:s", strtotime($row['comp_date'])) . ")" . "," . $row['status'] . "," . $row['details'];
         $data = $this->Admin_model->popRemark();
@@ -129,7 +133,6 @@ class Admin extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-
         $data['title'] = 'Add Category';
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
@@ -139,14 +142,10 @@ class Admin extends CI_Controller {
 
     public function insertCategory() {
         $data = $this->input->post();
-        //print_r($data);
-//		$data['category']	= 	$this->string_validate($data['category']);
-//		$data['level']	=	$this->string_validate($data['level']);
-        $this->load->model('Admin_model');
         $this->Admin_model->addCat($data);
         session_start();
         $_SESSION['stmt'] = TRUE;
-        redirect('http://localhost/ci/index.php/admin/add_category/');
+        redirect('http://localhost/ci/index.php/admin/add_category');
     }
 
     public function del_category($page = 'delete') {
@@ -154,9 +153,7 @@ class Admin extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-
         $data['title'] = 'Delete Category';
-        $this->load->model('Admin_model');
         $data['category'] = $this->Admin_model->getCategory();
         //	print_r($data);
         $this->load->view('templates/user_header', $data);
@@ -169,12 +166,10 @@ class Admin extends CI_Controller {
         $data = $this->input->get();
         //print_r($data);
         $cat = $data['category'];
-        //print_r($cat);
-        $this->load->model('Admin_model');
         $this->Admin_model->deleteCat($cat);
         session_start();
         $_SESSION['stmt'] = TRUE;
-        redirect('http://localhost/ci/index.php/admin/del_category/');
+        redirect('http://localhost/ci/index.php/admin/del_category');
     }
 
     public function clean_database($page = 'clean') {
@@ -190,10 +185,9 @@ class Admin extends CI_Controller {
 
     public function deleteComplaints() {
         $type = $this->input->post('clean');
-        print_r($type);
-        $this->load->model('Admin_model');
+        //print_r($type);        
         $this->Admin_model->deleteComplaints($type);
-        redirect('http://localhost/ci/index.php/admin/clean_database/');
+        redirect('http://localhost/ci/index.php/admin/clean_database');
     }
 
     public function profile($page = 'profile') {
@@ -201,7 +195,6 @@ class Admin extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $this->load->model('Admin_model');
         $data = $this->Admin_model->getProfile();
         $data['title'] = ucfirst($page);
         $this->load->view('templates/user_header', $data);
@@ -217,10 +210,8 @@ class Admin extends CI_Controller {
         $pass = $this->input->post('pass');
         $repass = $this->input->post('repass');
         session_start();
-        $this->load->model('Admin_model');
         $data = $this->Admin_model->getProfile();
         if (isset($oldpass)) {
-
             $salt = "thispasswordcannotbehacked";
             $oldpass = hash('sha256', $salt . $oldpass);
             if ($data['pass'] != $oldpass) {
@@ -242,12 +233,31 @@ class Admin extends CI_Controller {
                 if ($_SESSION['passerr'] == '') {
                     $salt = "thispasswordcannotbehacked";
                     $pass = hash('sha256', $salt . $pass);
-                    $this->load->model('Admin_model');
                     $this->Admin_model->updatePro($pass);
                 }
-                redirect('http://localhost/ci/index.php/student/profile/');
+                redirect('http://localhost/ci/index.php/admin/profile');
             }
         }
+    }
+
+    public function updateRemark() {
+        $user = $_SESSION['compid'];
+        if ($_POST['remark'] != '') {
+            $remark = $this->string_validate($_POST['remark']);
+            $remark = str_replace("'", '', $remark);
+            $sql = "insert into remarks(remark,comp_id,user_type,time) values('" . $remark . "','" . ucwords($user) . "' ,'" . $_SESSION['user_type'] . "','" . date('Y-m-d H:i:s') . "')";
+            $this->Admin_model->addRemark($sql);
+        }
+        if ($_POST['status'] != '') {
+            $sql = "update complaints set status = '" . $_POST['status'] . "' where comp_id = " . $_SESSION['compid'];
+            $this->Admin_model->addRemark($sql);
+            if ($_POST['cdate'] != "") {
+                $cdate = date("Y-m-d H:i:s", strtotime($_POST['cdate']));
+                $sql = "update complaints set exp_date = '" . $cdate . "' where comp_id = " . $_SESSION['compid'];
+                $this->Admin_model->addRemark($sql);
+            }
+        }
+        redirect('http://localhost/ci/index.php/admin/home');
     }
 
 }

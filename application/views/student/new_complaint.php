@@ -18,7 +18,7 @@
 <section class="container small">
     <div class="box">
 
-        <form method="post" action="<?php echo base_url(); ?>index.php/student/check/" name="complaint" id="complaint">
+        <form method="post" action="<?php echo base_url(); ?>index.php/student/check" name="complaint" id="complaint">
             <div id="type"><h3>Electricity</h3>
                 <input type="hidden" name="type" value="Electricity"/>
             </div>
