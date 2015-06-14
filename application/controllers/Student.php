@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Student extends CI_Controller {
@@ -6,14 +7,15 @@ class Student extends CI_Controller {
     public function __construct() {
         parent::__construct();
         session_start();
-        if (!isset($_SESSION['id']))
-            header('location:home');
-        else if ($_SESSION['user_type'] == 'caretaker' || $_SESSION['user_type'] == 'warden') {
-            header('location:admin');
+        if (!isset($_SESSION['id'])) {
+            header('location: ' . base_url() . 'index.php/complaint/home');
+            die();
+        } else if ($_SESSION['user_type'] == 'caretaker' || $_SESSION['user_type'] == 'warden') {
+            header('location: ' . base_url() . 'index.php/admin/home');
             die();
         }
     }
-    
+
     function format_date($str) {
         $month = array(" ", "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec");
         $y = explode(' ', $str);
@@ -60,8 +62,8 @@ class Student extends CI_Controller {
         }
 
         $data['type'] = $this->input->post('type');
-        if ($data['type'] === '')
-            redirect('http://localhost/ci/index.php/student/home');
+        if ($data['type'] == '')
+            redirect(base_url() . 'index.php/student/home');
         $data['message'] = $this->input->post('message');
         $data['level'] = $this->input->post('level');
         $data['go'] = $this->input->post('go');
@@ -126,7 +128,7 @@ class Student extends CI_Controller {
         $this->load->model('Student_model');
         $this->load->model('Admin_model');
         $data['status'] = $this->Student_model->getStatus();
-        $sql="select * from complaints where roomno = '".$_SESSION['room']."'";
+        $sql = "select * from complaints where roomno = '" . $_SESSION['room'] . "'";
         $data['row'] = $this->Admin_model->filteredContent($sql);
         $data['title'] = ucfirst($page);
         $this->load->view('templates/user_header', $data);
@@ -179,22 +181,19 @@ class Student extends CI_Controller {
 
             if (isset($pass) && isset($repass)) {
                 if ($pass == $repass)
-                    echo $_SESSION['matcherr'] = '';
+                    $_SESSION['matcherr'] = '';
                 else
                     $_SESSION['matcherr'] = "Passwords do not match. Please try again";
 
-                if ($this->valid_pass($pass))
+                if ($this->valid_pass($pass) && $_SESSION['olderr'] == '') {
                     $_SESSION['passerr'] = '';
-                else
-                    $_SESSION['passerr'] = "Password is not valid. ";
-
-                if ($_SESSION['passerr'] == '') {
                     $salt = "thispasswordcannotbehacked";
                     $pass = hash('sha256', $salt . $pass);
                     $this->load->model('Student_model');
                     $this->Student_model->updatePro($pass);
-                }
-                redirect('http://localhost/ci/index.php/student/profile');
+                } else
+                    $_SESSION['passerr'] = "Password is not valid. ";
+                redirect(base_url() . 'index.php/student/profile');
             }
         }
     }

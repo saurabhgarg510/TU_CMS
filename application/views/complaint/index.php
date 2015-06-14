@@ -42,7 +42,6 @@
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <!-- Include jQuery Popup Overlay -->
     <script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
-
     <script>
         $(document).ready(function() {
             // Initialize the plugin

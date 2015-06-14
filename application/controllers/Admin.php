@@ -113,7 +113,7 @@ class Admin extends CI_Controller {
         $_SESSION['fstat'] = $this->input->get('fstat');
         $_SESSION['f_sdate'] = $this->input->get('f_sdate');
         $_SESSION['f_edate'] = $this->input->get('f_edate');
-        redirect('http://localhost/ci/index.php/admin/home');
+        redirect(base_url() . 'index.php/admin/home');
     }
 
     public function popup() {
@@ -145,7 +145,7 @@ class Admin extends CI_Controller {
         $this->Admin_model->addCat($data);
         session_start();
         $_SESSION['stmt'] = TRUE;
-        redirect('http://localhost/ci/index.php/admin/add_category');
+        redirect(base_url() . 'index.php/admin/add_category');
     }
 
     public function del_category($page = 'delete') {
@@ -169,7 +169,7 @@ class Admin extends CI_Controller {
         $this->Admin_model->deleteCat($cat);
         session_start();
         $_SESSION['stmt'] = TRUE;
-        redirect('http://localhost/ci/index.php/admin/del_category');
+        redirect(base_url() . 'index.php/admin/del_category');
     }
 
     public function clean_database($page = 'clean') {
@@ -187,7 +187,7 @@ class Admin extends CI_Controller {
         $type = $this->input->post('clean');
         //print_r($type);        
         $this->Admin_model->deleteComplaints($type);
-        redirect('http://localhost/ci/index.php/admin/clean_database');
+        redirect(base_url() . 'index.php/admin/clean_database');
     }
 
     public function profile($page = 'profile') {
@@ -235,7 +235,7 @@ class Admin extends CI_Controller {
                     $pass = hash('sha256', $salt . $pass);
                     $this->Admin_model->updatePro($pass);
                 }
-                redirect('http://localhost/ci/index.php/admin/profile');
+                redirect(base_url() . 'index.php/admin/profile');
             }
         }
     }
@@ -257,7 +257,7 @@ class Admin extends CI_Controller {
                 $this->Admin_model->addRemark($sql);
             }
         }
-        redirect('http://localhost/ci/index.php/admin/home');
+        redirect(base_url() . 'index.php/admin/home');
     }
 
 }

@@ -58,7 +58,7 @@ if ($complaint['count'] > 0) {
                 </tbody>
             </table>
         </div>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" >
+        <form action="<?php echo base_url(); ?>index.php/student/addComp" method="post" >
             <center><ul class="actions">
                     <li><input type="hidden" value="go" name="go"/></li>
                     <li><a><input type="submit" class="button" value="Still Submit"  /></a></li>
@@ -67,12 +67,11 @@ if ($complaint['count'] > 0) {
                 <b><p style="color:red">Warning : Do not submit the same cluster complaint if it has already been registered. </p></b>
             </center>
         </form>
-    </div>
     </section>
     <?php
 }
 else {
     unset($go);
-    header('location: http://localhost/ci/index.php/student/addComp');
+    header('location: ' . base_url() . 'index.php/student/addComp');
 }
 ?>
