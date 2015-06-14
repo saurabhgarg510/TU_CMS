@@ -1,6 +1,6 @@
-        <section id="main" class="container" >
-        <h3>How it works!!</h3>
-        <ol>
+<section id="main" class="container" >
+    <h3>How it works!!</h3>
+    <ol>
         <li>Login with the username and password that you have received on your registered email.</li>
         <li>Once you login,you can add complaints by selecting the category of your complaint and providing relevant details.</li>
         <li>You can register atmost 2 complaints in one day.</li>
@@ -11,17 +11,17 @@
         <li>If you are still experiencing problems on the same, add a new complaint giving complaint id of previous complaint for reference.</li>
         <li>We know how restless you can become if your complaint is not being resolved. You can always contact the warden at warden@onlinehostelj.in</li>
         <li>The warden will change the status to URGENT and your complaint will be resolved on priority basis.</li>
-        </ol>
-        <h3>General Instructions</h3>
-        <ol>
+    </ol>
+    <h3>General Instructions</h3>
+    <ol>
         <li>First thing first. Change your password by going to account settings as soon as you receive the auto generated password.</li>
         <li> Please do not write your name,cluster,contact no. in the complaint box. They will be automatically fetched from the database. </li>
         <li>Please drop your feedback about our little operation. We value your feedback. </li>
         <li>For any other query, feel free to contact us on: developer@onlinehostelj.in</li>
-        </ol>
-        <br>
-         
-        Happy Complaining!! ;)
-        
-        
-        </section>
+    </ol>
+    <br>
+
+    Happy Complaining!! ;)
+
+
+</section>
