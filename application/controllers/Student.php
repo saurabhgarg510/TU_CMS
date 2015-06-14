@@ -62,7 +62,7 @@ class Student extends CI_Controller {
         }
 
         $data['type'] = $this->input->post('type');
-        if ($data['type'] === '')
+        if ($data['type'] == '')
             redirect(base_url() . 'index.php/student/home');
         $data['message'] = $this->input->post('message');
         $data['level'] = $this->input->post('level');

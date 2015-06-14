@@ -28,9 +28,9 @@ class Student_model extends CI_Model {
 
     function getNumComp($data) {
         if ($data['level'] == 'cluster') {
-            $result = $this->db->query("select * from complaints where roomno like '" . $data['cluster'] . "%' and not(status='Complete') and category='" . $_SESSION['type'] . "' and comp_type='" . $data['level'] . "'");
+            $result = $this->db->query("select * from complaints where roomno like '" . $data['cluster'] . "%' and not(status='Complete') and category='" . $data['type'] . "' and comp_type='" . $data['level'] . "'");
         } else
-            $result = $this->db->query("select * from complaints where roomno like '" . $data['room'] . "%' and not(status='Complete') and category='" . $_SESSION['type'] . "' and comp_type='" . $data['level'] . "'");
+            $result = $this->db->query("select * from complaints where roomno like '" . $data['room'] . "%' and not(status='Complete') and category='" . $data['type'] . "' and comp_type='" . $data['level'] . "'");
 
         $details = array();
         $details['count'] = $result->num_rows();
