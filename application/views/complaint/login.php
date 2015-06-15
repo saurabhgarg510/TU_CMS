@@ -1,4 +1,5 @@
 <script src="<?php echo base_url(); ?>/public/js/login_js.js"></script>
+
 <!-- Main -->
 <section id="main" class="container small" >
 
@@ -19,7 +20,17 @@
                                 document.getElementById('signin').click()" required/>
                 </div>
             </div>
-
+<div class="row uniform half">
+                <div class="12u">
+                    
+                     <label id="captchenable" style="display:none;color:red">
+                    <input type="text" name="captcha" id="captcha" placeholder="Image"  required/><br>
+                    <img src="<?php echo base_url(); ?>/public/images/captcha.php"></img>
+     
+                     </label>
+                    
+                </div>
+            </div>
             <div class="row uniform half">
                 <div class="12u">
                     <center>
