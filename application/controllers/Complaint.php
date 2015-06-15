@@ -28,7 +28,7 @@ class Complaint extends CI_Controller {
         }
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
-        $this->load->view('templates/header_static', $data);
+        $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
         $this->load->view('templates/footer');
     }
@@ -40,7 +40,7 @@ class Complaint extends CI_Controller {
         }
 
         $data['title'] = ucfirst($page . 's'); // Capitalize the first letter
-        $this->load->view('templates/header_static', $data);
+        $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
         $this->load->view('templates/footer');
     }
@@ -74,7 +74,7 @@ class Complaint extends CI_Controller {
             show_404();
         }
         $data['title'] = ucfirst($page . ' Us'); // Capitalize the first letter
-        $this->load->view('templates/header_static', $data);
+        $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
@@ -132,7 +132,7 @@ class Complaint extends CI_Controller {
         }
         $this->checkSession();
         $data['title'] = ucfirst($page . ' Password'); // Capitalize the first letter
-        $this->load->view('templates/header_static', $data);
+        $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
         session_unset();
     }
@@ -208,7 +208,7 @@ class Complaint extends CI_Controller {
             if ($email_code == $email_newcode) {
                 $data['title'] = ucfirst('Reset Password'); // Capitalize the first letter
                 $data['email'] = $email;
-                $this->load->view('templates/header_static', $data);
+                $this->load->view('templates/header', $data);
                 $this->load->view('complaint/reset', $data);
             }
         } else /*         * REDIRECT to some error page* 
