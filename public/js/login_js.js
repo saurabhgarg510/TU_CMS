@@ -33,7 +33,7 @@ function val()
         {document.getElementById("captchenable").style.display = 'block';
         }
        
-        send();
+        send(y,flag);
         }
     else
         return;
@@ -44,7 +44,23 @@ var add = (function() {
    })();
 function send()
 { 
-       
+       var t=arguments[0];
+       var m=arguments[1];
+       if(t>=3)
+       {  var c= document.getElementById("captcha").value;
+       if (c == '')
+    {
+        document.getElementById("captcha").className = "invalid";
+        m *= 0;
+    }
+    else
+    {
+        m *= 1;
+        document.getElementById("captcha").className = "";
+    }
+       }
+       if(m)
+       {
     document.getElementById("signin").disabled = true;
     $.ajax({
         type: 'post',
@@ -68,4 +84,5 @@ function send()
             }
         }
     });
+}
 }
