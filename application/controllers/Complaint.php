@@ -102,6 +102,10 @@ class Complaint extends CI_Controller {
 
     public function check_user() {
         $flag = 1;
+        if (!isset($_SESSION['false_login']))
+            $_SESSION['false_login'] = 1;
+        else
+            $_SESSION['false_login'] += 1;
         $data['email'] = $this->input->post('email');
         $data['password'] = $this->input->post('password');
         $salt = "thispasswordcannotbehacked";
@@ -113,15 +117,23 @@ class Complaint extends CI_Controller {
             else
                 $flag = 0;
         }
+        else if($_SESSION['false_login']>3) $flag = 0;
         if ($flag == 1) {
+            
             $this->load->model('Outer_model');
             $result = $this->Outer_model->validate_user($data);
-            if ($result == 'student')
+            if ($result == 'student'){
                 echo 'student/home';
+                unset($_SESSION['false_login']);
+            }
             else if ($result == 'caretaker' || $result == 'warden')
-                echo 'admin/home';
-            else
+            {
+                echo 'admin/home';            
+                unset($_SESSION['false_login']);
+            }            
+            else{
                 echo 0;
+            }
         }
     }
 
@@ -214,6 +226,7 @@ class Complaint extends CI_Controller {
         } else /*         * REDIRECT to some error page* 
 
 
+
          
             */;
     }
@@ -231,6 +244,7 @@ class Complaint extends CI_Controller {
                 $this->Outer_model->updatePass($email, $pass);
             }
         } else /*         * REDIRECT to some error page* 
+
 
 
          

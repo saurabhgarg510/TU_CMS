@@ -44,15 +44,6 @@ var add = (function() {
 function send() {
     var incorrect_login_counter = arguments[0];
     var flag = arguments[1];
-    if (incorrect_login_counter >= 3) {
-        var captcha = document.getElementById("captcha").value;
-        if (captcha == '') {
-            flag *= 0;            
-        }
-        else {
-            flag *= 1;
-        }
-    }
     if (flag)
     {
         document.getElementById("signin").disabled = true;
@@ -70,10 +61,7 @@ function send() {
                     window.location.assign('http://localhost/ci/index.php/' + data);
                 }
                 else {
-                    document.getElementById("signin").disabled = false;
-                    document.getElementById("incorrect").style.display = 'block';
-                    //document.getElementById("image").innerHTML='hello';
-                    //document.getElementById("image").innerHTML='<img src="http://localhost/ci/public/images/captcha.php" height="50px" width="100px">';
+                    window.location.assign('http://localhost/ci/index.php/complaint/sign_in');
                 }
             }
         });
