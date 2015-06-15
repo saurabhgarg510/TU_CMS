@@ -101,29 +101,28 @@ class Complaint extends CI_Controller {
     }
 
     public function check_user() {
-        $flag=1;
-   
+        $flag = 1;
         $data['email'] = $this->input->post('email');
         $data['password'] = $this->input->post('password');
         $salt = "thispasswordcannotbehacked";
         $data['password'] = hash('sha256', $salt . $data['password']);
         $data['captcha'] = $this->input->post('captcha');
-        if($data['captcha']!='')
-        {
-              if($_SESSION['code']==$data['captcha'])
-                  $flag=1;
-              else 
-        $flag=0;}
-              if($flag==1)
-              {
-        $this->load->model('Outer_model');
-        $result = $this->Outer_model->validate_user($data);
-        if ($result == 'student')
-            echo 'student/home';
-        else if ($result == 'caretaker' || $result == 'warden')
-            echo 'admin/home';
-        else
-              echo 0;}
+        if ($data['captcha'] != '') {
+            if ($_SESSION['code'] == $data['captcha'])
+                $flag = 1;
+            else
+                $flag = 0;
+        }
+        if ($flag == 1) {
+            $this->load->model('Outer_model');
+            $result = $this->Outer_model->validate_user($data);
+            if ($result == 'student')
+                echo 'student/home';
+            else if ($result == 'caretaker' || $result == 'warden')
+                echo 'admin/home';
+            else
+                echo 0;
+        }
     }
 
     public function forgotPassword($page = 'forgot') {
@@ -214,6 +213,7 @@ class Complaint extends CI_Controller {
             }
         } else /*         * REDIRECT to some error page* 
 
+
          
             */;
     }
@@ -231,6 +231,7 @@ class Complaint extends CI_Controller {
                 $this->Outer_model->updatePass($email, $pass);
             }
         } else /*         * REDIRECT to some error page* 
+
 
          
             */;

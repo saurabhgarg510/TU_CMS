@@ -20,26 +20,26 @@
                                 document.getElementById('signin').click()" required/>
                 </div>
             </div>
-<div class="row uniform half">
-                <div class="12u">
-                    
-                     <label id="captchenable" style="display:none;color:red">
-                    <input type="text" name="captcha" id="captcha" placeholder="Image"  required/><br>
-                    <img src="<?php echo base_url(); ?>/public/images/captcha.php"></img>
-     
-                     </label>
-                    
-                </div>
-            </div>
             <div class="row uniform half">
                 <div class="12u">
                     <center>
-                        <label id="incorrect" style="display:none;color:red">Incorrect Email ID or Password</label>
+                    <label id="captchenable" style="display:none; color:red">
+                        <div class="4u" style="float: left">More than 2 wrong login attempts. Enter the number shown.</div>
+                        <div class="4u" style="float: left" id="image"><img src="<?php echo base_url(); ?>/public/images/captcha.php" height="50px" width="100px"></div>
+                        <div class="4u" style="float: left"><input type="text" maxlength="4" name="captcha" id="captcha" placeholder="Image"  required/></div>                        
+                    </label>
+                    </center>
+                </div>
+            </div>
+            <div class="row uniform half">
+                <div class="12u" style="padding-top:0px; padding-bottom: 10px">
+                    <center>
+                        <div id="incorrect" style="display:none;color:red">Incorrect Email ID or Password</div>
                     </center>
                 </div>
             </div>
             <div class="row uniform">
-                <div class="12u">
+                <div class="12u" style="padding-top:0px">
                     <ul class="actions align-center">
                         <li><a><input type="button" class="special" id="signin" onClick="val()" value="Sign In" /></a></li>
                         <li><a class="button special" href="<?php echo base_url(); ?>index.php/complaint/forgotPassword">Forgot Password?</a></li>
