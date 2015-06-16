@@ -6,14 +6,21 @@ class Student extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        header("X-XSS-Protection: 1 mode=block ");
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header("Cache-Control: no-cache");
+        header("Pragma: no-cache");
         session_start();
+        session_regenerate_id(true);
         if (!isset($_SESSION['id'])) {
-            header('location: ' . base_url() . 'index.php/complaint/home');
+            header('location: ' . base_url() . 'index.php/complaint');
             die();
         } else if ($_SESSION['user_type'] == 'caretaker' || $_SESSION['user_type'] == 'warden') {
-            header('location: ' . base_url() . 'index.php/admin/home');
+            header('location: ' . base_url() . 'index.php/admin');
             die();
         }
+        $this->load->model('Student_model');
     }
 
     function format_date($str) {
@@ -39,13 +46,13 @@ class Student extends CI_Controller {
         return $date;
     }
 
-    public function home($page = 'new_complaint') {
+    public function index($page = 'new_complaint') {
         if (!file_exists(APPPATH . '/views/student/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
 
-        $this->load->model('Student_model');
+        
         $data['category'] = $this->Student_model->getData();
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
@@ -63,16 +70,15 @@ class Student extends CI_Controller {
 
         $data['type'] = $this->input->post('type');
         if ($data['type'] == '')
-            redirect(base_url() . 'index.php/student/home');
+            redirect(base_url() . 'index.php/student');
         $data['message'] = $this->input->post('message');
         $data['level'] = $this->input->post('level');
         $data['go'] = $this->input->post('go');
-
         $data['flag'] = 0;
         if ($data['level'] == "room" || $data['level'] == "cluster")
             $data['flag'] = 1;
         //print_r($data);
-        $this->load->model('Student_model');
+        
         $data['num_results'] = $this->Student_model->getNumCat($data['type']);
         $data['room'] = $this->Student_model->getRoom();
         $data['cluster'] = substr($data['room'], 0, 4);
@@ -84,8 +90,7 @@ class Student extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function addComp() {
-        $this->load->model('Student_model');
+    public function addComp() {        
         $login = $this->Student_model->checkLoginCount();
         $data['status'] = $login;
         $data['title'] = 'Details';
@@ -125,7 +130,7 @@ class Student extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $this->load->model('Student_model');
+        
         $this->load->model('Admin_model');
         $data['status'] = $this->Student_model->getStatus();
         $sql = "select * from complaints where roomno = '" . $_SESSION['room'] . "'";
@@ -153,7 +158,7 @@ class Student extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $this->load->model('Student_model');
+        
         $data = $this->Student_model->getProfile();
         $data['title'] = ucfirst($page);
         $this->load->view('templates/user_header', $data);
@@ -167,8 +172,7 @@ class Student extends CI_Controller {
     public function updateProfile() {
         $oldpass = $this->input->post('oldpass');
         $pass = $this->input->post('pass');
-        $repass = $this->input->post('repass');
-        $this->load->model('Student_model');
+        $repass = $this->input->post('repass');        
         $data = $this->Student_model->getProfile();
         if (isset($oldpass)) {
 
@@ -189,7 +193,7 @@ class Student extends CI_Controller {
                     $_SESSION['passerr'] = '';
                     $salt = "thispasswordcannotbehacked";
                     $pass = hash('sha256', $salt . $pass);
-                    $this->load->model('Student_model');
+                    
                     $this->Student_model->updatePro($pass);
                 } else
                     $_SESSION['passerr'] = "Password is not valid. ";

@@ -2,11 +2,11 @@
 require_once(APPPATH . "libraries/functions.php");
 ?>
 
-<script type="text/javascript" src="<?php echo base_url(); ?>/public/js/jquery.tablesorter.js"></script>
-<script type="text/javascript">$(function() {
+<script type="text/javascript" src="<?php echo base_url(); ?>public/js/minified/jquery.tablesorter.js" defer></script>
+<script type="text/javascript" defer>$(function() {
         $('#keywords').tablesorter({debug: true});
     });</script>
-<script src="<?php echo base_url(); ?>/public/js/complaint_stu.js"></script>
+<script src="<?php echo base_url(); ?>public/js/minified/complaint_stu.js" defer></script>
 <!-- Main -->
 <section id="main" class="container large">
     <header>
@@ -49,7 +49,7 @@ require_once(APPPATH . "libraries/functions.php");
             <div class="row">
                 <div class="12u" >
                     <section class="box" id="print">
-                        <h1 style="font-size:32px;text-align:center;margin-top:0px"> Complaints  </h1>
+                        
                         <div class="table-wrapper">
                             <table id="keywords" class="tablesorter" >
                                 <thead>
@@ -95,8 +95,8 @@ require_once(APPPATH . "libraries/functions.php");
 </div>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!-- Include jQuery Popup Overlay -->
-<script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
-<script>
+<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
+<script defer>
     $(document).ready(function() {
         // Initialize the plugin
         $('#fadeandscale').popup();

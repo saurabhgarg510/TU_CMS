@@ -5,15 +5,18 @@
             echo 'Hostel-J ';
             if (isset($title))
                 echo "| $title";
-            ?></title>               
-        <script src="<?php echo base_url(); ?>/public/js/jquery.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/jquery.dropotron.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/skel.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/skel-layers.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/init.js"></script>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/skel.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/style.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/style-wide.css" />
+            ?></title>
+        <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"  />
+        <meta http-equiv="Cache-control" content="no-store">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/skel.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style-wide.css" />
+        <script src="<?php echo base_url(); ?>public/js/jquery.min.js"></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.dropotron.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/skel.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/skel-layers.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/init.js" defer></script>
+        
         <style>
             html, body {
                 max-width: 100%;
@@ -36,7 +39,7 @@
                 echo "skel-layers-fixed";
         }
         ?>">
-            <h1 style="font-size:30px "><a href="">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
+            <h1 style="font-size:30px "><a href="<?php echo base_url(); ?>index.php/complaint">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
             <nav id="nav">      <h1 style="font-size:30px "><a href="">HOSTEL-J</a><a href="login.php">Sign In</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
 
             </nav>

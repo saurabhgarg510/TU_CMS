@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo 'Hostel-J ';
-if (isset($title)) echo "| $title"; ?></title>               
-        <script src="<?php echo base_url(); ?>/public/js/jquery.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/jquery.dropotron.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/skel.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/skel-layers.min.js"></script>
-        <script src="<?php echo base_url(); ?>/public/js/init.js"></script>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/skel.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/style.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/style-wide.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>/public/css/strength.css" />
+        <title><?php
+            echo 'Hostel-J ';
+            if (isset($title))
+                echo "| $title";
+            ?></title>       
+        <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"  />
+        <meta http-equiv="Cache-control" content="no-store">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/skel.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style-wide.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/strength.css" />
+        <script src="<?php echo base_url(); ?>public/js/jquery.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.dropotron.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/skel.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/skel-layers.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/minified/init.js" defer></script>
         <style>
             html, body {
                 max-width: 100%;
@@ -27,7 +32,7 @@ if (isset($title)) echo "| $title"; ?></title>
     </head>
     <body>
         <header id="header" class="skel-layers-fixed">
-            <h1 style="font-size:30px"><a href="">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
+            <h1 style="font-size:30px"><a href="<?php echo base_url(); ?>index.php/complaint">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
             <nav id="nav">
                 <ul>
                     <li><?php
@@ -36,25 +41,24 @@ if (isset($title)) echo "| $title"; ?></title>
                         ?>
                         <a href="" class="icon fa-angle-down"><?php echo $_SESSION['name']; ?></a>
                         <ul><?php if ($_SESSION['user_type'] == 'student') { ?>
-                                <li><a href="<?php echo base_url(); ?>index.php/student/home">New Complaints</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/student">New Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/status">View Status</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
                                 <?php
                             } else if ($_SESSION['user_type'] == 'caretaker') {
                                 ?>
-                                <li><a href="<?php echo base_url(); ?>index.php/admin/home">Complaints</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
 <?php } else if ($_SESSION['user_type'] == 'warden') { ?>
-                                <li><a href="<?php echo base_url(); ?>index.php/admin/home">Complaints</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/add_category">Add Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/del_category">Delete Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/clean_database">Clear Database</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
 <?php } ?>
-
                         </ul>
                     </li>
                 </ul>
