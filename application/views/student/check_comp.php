@@ -3,12 +3,12 @@ $count = 0;
 if ($go == '') {
     if ($message == '') {
         echo "<center><br /><br/><br /><br /><h2>Invalid Data.....Redirecting</h2></center>";
-        echo "<script>setTimeout(function(){document.location.assign('http://localhost/ci/index.php/student/home')}, 2000)</script>";
+        echo "<script>setTimeout(function(){document.location.assign('http://localhost/ci/index.php/student')}, 2000)</script>";
         die();
     }
     if ($num_results == 0 || $flag == 0) {
         echo "<center><br /><br/><br /><br /><h2>Invalid Data.....Redirecting</h2></center>";
-        echo "<script>setTimeout(function(){document.location.assign('http://localhost/ci/index.php/student/home')}, 2000)</script>";
+        echo "<script>setTimeout(function(){document.location.assign('http://localhost/ci/index.php/student')}, 2000)</script>";
         die();
     }
     $_SESSION['type'] = $type;
@@ -62,7 +62,7 @@ if ($complaint['count'] > 0) {
             <center><ul class="actions">
                     <li><input type="hidden" value="go" name="go"/></li>
                     <li><a><input type="submit" class="button" value="Still Submit"  /></a></li>
-                    <li><a><input type="button" class="button" value="Go back" onclick='window.location.assign("http://localhost/ci/index.php/student/home")' /></a></li>
+                    <li><a><input type="button" class="button" value="Go back" onclick='window.location.assign("http://localhost/ci/index.php/student")' /></a></li>
                 </ul>
                 <b><p style="color:red">Warning : Do not submit the same cluster complaint if it has already been registered. </p></b>
             </center>

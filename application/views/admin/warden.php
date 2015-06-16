@@ -1,12 +1,12 @@
 <?php
 require_once(APPPATH . "libraries/functions.php");
 ?>       
-<script src="<?php echo base_url(); ?>/public/js/print.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>/public/js/jquery.tablesorter.js"></script>
-<script type="text/javascript">$(function() {
+<script src="<?php echo base_url(); ?>public/js/minified/print.js" defer></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>public/js/minified/jquery.tablesorter.js" defer></script>
+<script type="text/javascript" defer>$(function() {
         $('#keywords').tablesorter({debug: true});
     });</script>
-<script src="<?php echo base_url(); ?>/public/js/complaint_ct.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>public/js/minified/complaint_ct.js" type="text/javascript" defer></script>
 
 <section id="main" class="container large" style="padding: 0px">
         <form action="<?php echo base_url(); ?>index.php/admin/filter" method="get" id="form">
@@ -209,11 +209,11 @@ require_once(APPPATH . "libraries/functions.php");
 </section>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!-- Include jQuery Popup Overlay -->
-<script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
-<script>
-                                    $(document).ready(function() {
-                                        // Initialize the plugin
-                                        $('#fadeandscale').popup();
-                                        transition: 'all 0.3s'
-                                    });
+<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
+<script defer>
+    $(document).ready(function() {
+        // Initialize the plugin
+        $('#fadeandscale').popup();
+        transition: 'all 0.3s'
+    });
 </script>
