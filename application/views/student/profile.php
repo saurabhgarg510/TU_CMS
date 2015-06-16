@@ -1,4 +1,4 @@
-<script language="javascript">
+<script language="javascript" defer>
     function passwordChanged(id) {
         var strength = document.getElementById(id);
         var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&*]).*$", "g");
@@ -81,13 +81,13 @@
 </section>
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!-- Include jQuery Popup Overlay -->
-<script src="http://vast-engineering.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script>
-<script>
-                        $(document).ready(function() {
-                            $('#fadeandscale').popup({
-                                transition: 'all 0.3s' //optional
-                            });
-                        });
+<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
+<script defer>
+    $(document).ready(function() {
+        // Initialize the plugin
+        $('#fadeandscale').popup();
+        transition: 'all 0.3s'
+    });
 </script>
 <?php
 if (isset($_SESSION['success'])) {

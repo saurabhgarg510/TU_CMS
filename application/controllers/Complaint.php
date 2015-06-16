@@ -6,16 +6,23 @@ class Complaint extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        header("X-XSS-Protection: 1 mode=block ");
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Cache-Control: no-cache");
+        header("Pragma: no-cache");
         session_start();
+        session_regenerate_id(true);
     }
 
     function checkSession() {
         if (isset($_SESSION['user_type'])) {
             if ($_SESSION['user_type'] == 'student') {
-                header('location: ' . base_url() . 'index.php/student/home');
+                header('location: ' . base_url() . 'index.php/student');
                 die();
             } else if ($_SESSION['user_type'] == 'caretaker' || $_SESSION['user_type'] == 'warden') {
-                header('location: ' . base_url() . 'index.php/admin/home');
+                header('location: ' . base_url() . 'index.php/admin');
                 die();
             }
         }
@@ -45,7 +52,7 @@ class Complaint extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function home($page = 'index') {
+    public function index($page = 'index') {
         if (!file_exists(APPPATH . '/views/complaint/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
@@ -117,21 +124,19 @@ class Complaint extends CI_Controller {
             else
                 $flag = 0;
         }
-        else if($_SESSION['false_login']>3) $flag = 0;
+        else if ($_SESSION['false_login'] > 3)
+            $flag = 0;
         if ($flag == 1) {
-            
+
             $this->load->model('Outer_model');
             $result = $this->Outer_model->validate_user($data);
-            if ($result == 'student'){
-                echo 'student/home';
+            if ($result == 'student') {
+                echo 'student';
                 unset($_SESSION['false_login']);
-            }
-            else if ($result == 'caretaker' || $result == 'warden')
-            {
-                echo 'admin/home';            
+            } else if ($result == 'caretaker' || $result == 'warden') {
+                echo 'admin';
                 unset($_SESSION['false_login']);
-            }            
-            else{
+            } else {
                 echo 0;
             }
         }
@@ -227,6 +232,7 @@ class Complaint extends CI_Controller {
 
 
 
+
          
             */;
     }
@@ -247,17 +253,17 @@ class Complaint extends CI_Controller {
 
 
 
+
          
             */;
     }
 
     public function logout() {
-        session_start();
         if (!isset($_SESSION['id']))
-            header('location: ' . base_url() . 'index.php/complaint/home');
+            header('location: ' . base_url() . 'index.php/complaint');
         session_unset();
         session_destroy();
-        header('location: ' . base_url() . 'index.php/complaint/home');
+        header('location: ' . base_url() . 'index.php/complaint');
     }
 
 }

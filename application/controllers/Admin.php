@@ -7,9 +7,15 @@ class Admin extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Admin_model');
+        header("X-XSS-Protection: 1 mode=block ");
+        header('X-Content-Type-Options: nosniff');
+        header('X-Frame-Options: SAMEORIGIN');
+        header("Cache-Control: no-cache");
+        header("Pragma: no-cache");
         session_start();
+        session_regenerate_id(true);
         if (!isset($_SESSION['id']))
-            header('location:home');
+            header('location:complaint');
         else if ($_SESSION['user_type'] == 'student') {
             header('location:student');
             die();
@@ -51,7 +57,7 @@ class Admin extends CI_Controller {
         return TRUE;
     }
 
-    public function home($page = 'warden') {
+    public function index($page = 'warden') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
@@ -113,7 +119,7 @@ class Admin extends CI_Controller {
         $_SESSION['fstat'] = $this->input->get('fstat');
         $_SESSION['f_sdate'] = $this->input->get('f_sdate');
         $_SESSION['f_edate'] = $this->input->get('f_edate');
-        redirect(base_url() . 'index.php/admin/home');
+        redirect(base_url() . 'index.php/admin');
     }
 
     public function popup() {
@@ -257,7 +263,7 @@ class Admin extends CI_Controller {
                 $this->Admin_model->addRemark($sql);
             }
         }
-        redirect(base_url() . 'index.php/admin/home');
+        redirect(base_url() . 'index.php/admin');
     }
 
 }

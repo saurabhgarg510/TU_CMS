@@ -1,0 +1,6 @@
+<IfModule mod_deflate.c>
+<FilesMatch "\.(css|js|x?html?|php)($|\?.*$)">
+           SetOutputFilter DEFLATE
+        </FilesMatch>
+</IfModule>
+

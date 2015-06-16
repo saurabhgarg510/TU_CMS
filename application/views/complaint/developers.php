@@ -6,7 +6,7 @@
         <div class="6u" style="">
 
             <section class="box special" >
-                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>/public/images/sg.jpg" alt=""  /></center></span>
+                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/sg.jpg" alt=""  /></center></span>
                 <h3><a href="https://www.facebook.com/saurav.garg2" target="_blank" ><span class="label">Saurabh Garg</span></a></h3>
 
                 <h4>Mobile : 9041544335</h4>
@@ -20,7 +20,7 @@
         <div class="6u" >
 
             <section class="box special" >
-                <span class="image featured"  style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>/public/images/shivi.jpg" alt=""  /></center></span>
+                <span class="image featured"  style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/shivi.jpg" alt=""  /></center></span>
                 <h3>Shivanshu Gupta</a></h3>
                 <!--  <ul class="icons">
                       <li><a href="https://www.twitter.com/shivanshug94" target="_blank"  class="icon fa-twitter"><span class="label">Twitter</span></a></li>
@@ -37,7 +37,7 @@
         <div class="6u" style="">
 
             <section class="box special" >
-                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>/public/images/ss.jpg" alt=""  /></center></span>
+                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/ss.jpg" alt=""  /></center></span>
                 <h3>Shubham Singla</h3>
                 <!--<ul class="icons">
                     <li><a href="https://www.facebook.com/shubham.singla.129794" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -53,7 +53,7 @@
         <div class="6u" >
 
             <section class="box special" >
-                <span class="image featured"  style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>/public/images/simu.jpg" alt=""  /></center></span>
+                <span class="image featured"  style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/simu.jpg" alt=""  /></center></span>
                 <h3>Simranjot Singh</h3>
                 <!-- <ul class="icons">
                      <li><a href="https://www.twitter.com/simranjotwalia" class="icon fa-twitter" target="_blank" ><span class="label">Twitter</span></a></li>
@@ -70,7 +70,7 @@
         <div class="6u" style="">
 
             <section class="box special">
-                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>/public/images/vivi.jpg" alt=""  /></center></span>
+                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/vivi.jpg" alt=""  /></center></span>
                 <h3>Vivek Singh</h3>
                 <!-- <ul class="icons">
                      <li><a href="https://www.facebook.com/vivek1011" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>

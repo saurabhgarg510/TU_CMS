@@ -3,7 +3,7 @@ function val()
 {
     var flag = 1;
     var b = document.getElementById("password").value;
-    if (b == '') {
+    if (b === '') {
         document.getElementById("password").className = "invalid";
         flag *= 0;
     }
@@ -13,7 +13,7 @@ function val()
     }
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var chk = re.test(document.getElementById("username").value);
-    if (chk == '') {
+    if (chk === '') {
         document.getElementById("username").value = null;
         document.getElementById("username").className = "invalid";
         flag *= 0;
@@ -24,26 +24,14 @@ function val()
     }
 
     if (flag) {
-        var incorrect_login_counter = add();
-        if (incorrect_login_counter >= 3) {
-            document.getElementById("captchenable").style.display = 'block';
-        }        
-        send(incorrect_login_counter, flag);
+        send(flag);
     }
     else
         return;
 }
 
-var add = (function() {
-    var counter = 0;
-    return function() {
-        return counter += 1;
-    }
-})();
-
 function send() {
-    var incorrect_login_counter = arguments[0];
-    var flag = arguments[1];
+    var flag = arguments[0];
     if (flag)
     {
         document.getElementById("signin").disabled = true;

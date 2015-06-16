@@ -8,7 +8,7 @@ if (!isset($_COOKIE['count'])) {
 <script>
     function spam_alert() {
         alert("To prevent spamming, we allow atmost 3 feedbacks in 8 hours from 1 machine");
-        window.location.assign("http://localhost/ci/index.php/complaint/home");
+        window.location.assign("http://localhost/ci/index.php/complaint");
     }
 </script>
 
