@@ -10,11 +10,24 @@ class Complaint extends CI_Controller {
         header('X-Content-Type-Options: nosniff');
         header('X-Frame-Options: SAMEORIGIN');
         header("Content-Security-Policy: script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval';");
-        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Expires: Mon, 26 Jul 2014 05:00:00 GMT");
         header("Cache-Control: no-cache");
         header("Pragma: no-cache");
         session_start();
         session_regenerate_id(true);
+    }
+
+    function string_validate($str) {
+        $str = filter_var($str, FILTER_SANITIZE_STRING);
+        $str1 = str_replace("%", "p", "$str");
+        $str = $this->db->escape($str1);
+        return str_replace("'", '', $str);
+    }
+
+    function valid_pass($candidate) {
+        if (!preg_match_all('$\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
+            return FALSE;
+        return TRUE;
     }
 
     function checkSession() {
@@ -59,6 +72,7 @@ class Complaint extends CI_Controller {
             show_404();
         }
         $this->checkSession();
+        $this->load->helper('smiley');
         $data['title'] = "Home";
         $this->load->view('templates/header', $data);
         $this->load->view('complaint/' . $page);
@@ -86,13 +100,6 @@ class Complaint extends CI_Controller {
         $this->load->view('complaint/' . $page);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
-    }
-
-    public function string_validate($str) {
-        $str = filter_var($str, FILTER_SANITIZE_STRING);
-        $str1 = str_replace("%", "p", "$str");
-        /* @var $mysqli type */
-        return $this->db->escape($str1);
     }
 
     public function insertContact() {
@@ -205,7 +212,7 @@ class Complaint extends CI_Controller {
 		';
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
-        $this->email->from('imcool.saurabh@gmail.com'); // change it to yours
+        $this->email->from('onlinehostelj.in'); // change it to yours
         $this->email->to($email); // change it to yours
         $this->email->subject('Password Reset at onlinehostelj.in');
         $this->email->message($message);
@@ -226,37 +233,51 @@ class Complaint extends CI_Controller {
             if ($email_code == $email_newcode) {
                 $data['title'] = ucfirst('Reset Password'); // Capitalize the first letter
                 $data['email'] = $email;
+                $data['email_code']=$email_code;
                 $this->load->view('templates/header', $data);
                 $this->load->view('complaint/reset', $data);
+            } else {
+                $this->load->view('templates/header');
+                $this->load->view('complaint/reset_error');
             }
-        } else /*         * REDIRECT to some error page* 
-
-
-
-
-         
-            */;
+        } else {
+            $this->load->view('templates/header');
+            $this->load->view('complaint/reset_error');
+        }
+        session_unset();
     }
 
     function updatePassword() {
         $email = $this->input->post('email');
+        $email = $this->string_validate($email);
+        $email_code = $this->input->post('email_code');
         $pass = $this->input->post('pass');
         $repass = $this->input->post('repass');
+        
         $this->load->model('Outer_model');
         $exists = $this->Outer_model->email_exists($email);
+        
         if ($exists) {
-            if ($pass == $repass) {
+            if ($pass == $repass)
+                $_SESSION['matcherr'] = '';
+            else
+                $_SESSION['matcherr'] = "Passwords do not match. Please try again";
+
+            if ($this->valid_pass($pass))
+                $_SESSION['passerr'] = '';
+            else
+                $_SESSION['passerr'] = "Password is not valid. ";
+            
+            if ($pass == $repass && $_SESSION['matcherr'] != '' && $_SESSION['passerr'] != '') {
                 $salt = "thispasswordcannotbehacked";
                 $pass = hash('sha256', $salt . $pass);
                 $this->Outer_model->updatePass($email, $pass);
             }
-        } else /*         * REDIRECT to some error page* 
-
-
-
-
-         
-            */;
+            else redirect(base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code);
+        } else {
+            $_SESSION['emailerr'] = 'We are not idiots sitting over here!';
+            redirect(base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code);
+        }
     }
 
     public function logout() {

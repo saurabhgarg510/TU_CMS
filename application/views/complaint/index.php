@@ -30,12 +30,17 @@
             <div class="box">
                 <div id="type">
                         <h3>What's New</h3>
-                        -> Simpler and More Secure. <br>
-                        -> One password for all sub-domains. <br>
-                        -> Added Forgot Password functionality. <br>
-                        -> Performance Enhancements. <br>
-                        -> Browse faster and better.<br>
-                        -> Bugs or Issues? Drop an email: saurabhgarg510@gmail.com
+                        <?php $str='
+                        -> Improved User Interface :)<br>
+                        -> More Secure than ever. :coolsmile:<br>
+                        -> One password for all sub-domains. All logins will now have<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;same username and password. :cheese:<br>
+                        -> Added Forgot Password functionality. :question:<br>
+                        -> Performance Enhancements. Browse faster and better. :coolhmm:<br>
+                        -> Bugs or Issues? Drop an email: saurabhgarg510@gmail.com 8-/' ; 
+                        $str=  parse_smileys($str, base_url().'public/smileys');
+                        echo $str;
+                        ?>
 
                 </div>
             </div>

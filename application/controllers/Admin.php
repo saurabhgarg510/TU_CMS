@@ -229,7 +229,7 @@ class Admin extends CI_Controller {
 
             if (isset($pass) && isset($repass)) {
                 if ($pass == $repass)
-                    echo $_SESSION['matcherr'] = '';
+                    $_SESSION['matcherr'] = '';
                 else
                     $_SESSION['matcherr'] = "Passwords do not match. Please try again";
 
