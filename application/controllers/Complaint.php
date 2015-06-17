@@ -9,6 +9,7 @@ class Complaint extends CI_Controller {
         header("X-XSS-Protection: 1 mode=block ");
         header('X-Content-Type-Options: nosniff');
         header('X-Frame-Options: SAMEORIGIN');
+        header("Content-Security-Policy: script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval';");
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Cache-Control: no-cache");
         header("Pragma: no-cache");

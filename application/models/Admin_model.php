@@ -57,6 +57,8 @@ class Admin_model extends CI_Model {
             $data['row']['comp_id'] = $row->comp_id;
             $data['row']['category'] = $row->category;
             $data['row']['roomno'] = $row->roomno;
+            $contact=$this->db->query("select contact from registration where roomno='".$row->roomno."'");
+            $data['row']['contact'] = $contact->row()->contact;
             $data['row']['comp_date'] = $row->comp_date;
             $data['row']['status'] = $row->status;
             $data['row']['details'] = $row->details;

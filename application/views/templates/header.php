@@ -8,6 +8,7 @@
             ?></title>
         <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"  />
         <meta http-equiv="Cache-control" content="no-store">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval'" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/skel.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style-wide.css" />
