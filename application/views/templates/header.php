@@ -40,7 +40,7 @@
                 echo "skel-layers-fixed";
         }
         ?>">
-            <h1 style="font-size:30px "><a href="<?php echo base_url(); ?>index.php/complaint">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
+            <h1 style="font-size:30px "><a href="<?php echo base_url(); ?>">HOSTEL-J</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
             <nav id="nav">      <h1 style="font-size:30px "><a href="">HOSTEL-J</a><a href="login.php">Sign In</a><a href="http://www.thapar.edu" target="_blank" style="font-weight:100"> Thapar University</a></h1>
 
             </nav>

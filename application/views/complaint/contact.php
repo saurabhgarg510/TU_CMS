@@ -1,7 +1,7 @@
 <?php
 if (!isset($_COOKIE['count'])) {
     $c = 1;
-    setcookie('count', $c, time() + (3600), "/");
+    setcookie('count', $c, time() + (28800), "/");
 }
 ?>
 
@@ -12,30 +12,37 @@ if (!isset($_COOKIE['count'])) {
     }
 </script>
 
-<?php //require_once(APPPATH.'libraries/functions.php');  ?>
+<?php
+//require_once(APPPATH.'libraries/functions.php'); 
+if (isset($_SESSION['stmt'])) {
+    //echo $_COOKIE['count'];
+    $c = $_COOKIE['count'];
+    $c += 1;
+    setcookie('count', $c, time() + (28800), "/");
+    if ($c > 2) {
+        ?>
+        <script type="text/javascript">
+            spam_alert();
+        </script>
+        <?php
+        die();
+    }
+    ?>
 
-<!-- Main -->
-<section id="main" class="container small" style="padding: 0">
-    <header style="padding: 0">
-        <h2 style="padding: 0">Contact Us</h2>
-        <p style="padding: 0">
-            <?php
-            if (isset($_SESSION['stmt'])) {
-                //echo $_COOKIE['count'];
-                $c = $_COOKIE['count'];
-                setcookie('count', $c, time() + (3600), "/");
-                if ($c > 2) {
-                    ?>
-                    <script type="text/javascript">
-                        spam_alert();
-                    </script>
-                    <?php
-                    die();
-                }
-
+    <!-- Main -->
+    <section id="main" class="container small" style="padding: 0">
+        <header style="padding: 0">
+            <h2 style="padding: 0">Contact Us</h2>
+            <p style="padding: 0">
+                <?php
                 echo "Hi " . $_SESSION['nm'] . ", we have received your message";
-            } else
+            } else {
+                echo '<section id="main" class="container small" style="padding: 0">
+        <header style="padding: 0">
+            <h2 style="padding: 0">Contact Us</h2>
+            <p style="padding: 0">';
                 echo "Tell us what you think about our little operation. ";
+            }
             ?></p>
     </header>
     <div class="box">

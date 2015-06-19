@@ -2,11 +2,12 @@
     <!-- Banner -->
     <section id="banner">
         <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="position:absolute; top: 0; z-index: 20000; color: wheat;">
-            Login with your registered email at the time of online allotment. Your password is the passkey from webkiosk.
+           <!-- Login with your registered email at the time of online allotment. Your password is the passkey from webkiosk.-->
+
         </marquee>
 
         <b><h2>Online Hostel J</h2></b><br>
-        <p></p>
+        <p><font color="blue"></font></p>
         <ul class="actions">
             <li><a href="<?php echo base_url(); ?>index.php/complaint/sign_in" class="button special">Sign In (For Complaints)</a>&nbsp &nbsp 
                 <a href="http://tuckshop.onlinehostelj.in" class="button special" target="_blank">Hostel J Tuck Shop</a>&nbsp &nbsp

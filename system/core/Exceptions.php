@@ -134,7 +134,7 @@ class CI_Exceptions {
 		{
 			log_message('error', $heading.': '.$page);
 		}
-
+                
 		echo $this->show_error($heading, $message, 'error_404', 404);
 		exit(4); // EXIT_UNKNOWN_FILE
 	}

@@ -11,7 +11,7 @@ class Complaint extends CI_Controller {
         header('X-Frame-Options: SAMEORIGIN');
         header("Content-Security-Policy: script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval';");
         header("Expires: Mon, 26 Jul 2014 05:00:00 GMT");
-        header("Cache-Control: no-cache");
+        header('Cache-Control: max-age=604800');
         header("Pragma: no-cache");
         session_start();
         session_regenerate_id(true);
@@ -165,7 +165,6 @@ class Complaint extends CI_Controller {
     public function checkEmail() {
         $this->load->helper('email');
         $email = $this->input->post('email');
-        session_start();
         if (valid_email($email)) {
             $email = trim($email);
             $this->load->model('Outer_model');
@@ -186,37 +185,25 @@ class Complaint extends CI_Controller {
     function send_reset_password_email($email, $name) {
         $email_code = sha1($email . $name);
 
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'imcool.saurabh@gmail.com', // change it to yours
-            'smtp_pass' => '', // change it to yours
-            'mailtype' => 'html',
-            'charset' => 'iso-8859-1',
-            'wordwrap' => TRUE
-        );
-
+        $to = $email;
+        $subject = 'Reset Password onlinehostelj.in';
         $message = '<html>
 		<body>
 		<p>Dear ' . $name . ', <br><br>
-		To reset your onlinehostelj.in password, <a href="<?php echo base_url(); ?>index.php/complaint/resetPassword/' . $email . '/' . $email_code . '/">click here</a>. <br><br>
+		To reset your onlinehostelj.in password, <a href="' . base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code . '">click here</a>. <br><br>
 		If you are not able to view the link above, copy and paste into your address bar: 
 		' . base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code . '/ <br><br>
 		If this was not you, kindly ignore this email.<br><br>
-		Thanks,<br>
+		Regards,<br>
 		Developer
 		</p>
 		</body>
 		</html>
 		';
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from('onlinehostelj.in'); // change it to yours
-        $this->email->to($email); // change it to yours
-        $this->email->subject('Password Reset at onlinehostelj.in');
-        $this->email->message($message);
-        $this->email->send();
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers.="From:Hostel-J<developer@onlinehostelj.in>";
+        mail($to, $subject, $message, $headers);
     }
 
     public function resetPassword($email, $email_code) {
@@ -233,7 +220,7 @@ class Complaint extends CI_Controller {
             if ($email_code == $email_newcode) {
                 $data['title'] = ucfirst('Reset Password'); // Capitalize the first letter
                 $data['email'] = $email;
-                $data['email_code']=$email_code;
+                $data['email_code'] = $email_code;
                 $this->load->view('templates/header', $data);
                 $this->load->view('complaint/reset', $data);
             } else {
@@ -253,10 +240,10 @@ class Complaint extends CI_Controller {
         $email_code = $this->input->post('email_code');
         $pass = $this->input->post('pass');
         $repass = $this->input->post('repass');
-        
+
         $this->load->model('Outer_model');
         $exists = $this->Outer_model->email_exists($email);
-        
+
         if ($exists) {
             if ($pass == $repass)
                 $_SESSION['matcherr'] = '';
@@ -267,15 +254,16 @@ class Complaint extends CI_Controller {
                 $_SESSION['passerr'] = '';
             else
                 $_SESSION['passerr'] = "Password is not valid. ";
-            
-            if ($pass == $repass && $_SESSION['matcherr'] != '' && $_SESSION['passerr'] != '') {
+
+            if ($pass == $repass && $_SESSION['matcherr'] == '' && $_SESSION['passerr'] == '') {
                 $salt = "thispasswordcannotbehacked";
                 $pass = hash('sha256', $salt . $pass);
                 $this->Outer_model->updatePass($email, $pass);
-            }
-            else redirect(base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code);
+		redirect(base_url() . 'index.php/complaint/sign_in');
+            } else
+                redirect(base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code);
         } else {
-            $_SESSION['emailerr'] = 'We are not idiots sitting over here!';
+            $_SESSION['emailerr'] = '';
             redirect(base_url() . 'index.php/complaint/resetPassword/' . $email . '/' . $email_code);
         }
     }

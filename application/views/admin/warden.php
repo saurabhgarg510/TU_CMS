@@ -77,7 +77,7 @@ require_once(APPPATH . "libraries/functions.php");
                         <div class="4u">
                             <ul class="actions" >
                                 <li class="4u"><a onclick="document.getElementById('form').submit()" class="button special" >Search</a></li>
-                                <li class="3u" style="margin-right: 20px;"><a href="warden.php" class="button special" >Reset</a></li>
+                                <li class="3u" style="margin-right: 20px;"><a href="<?php base_url().'index.php/admin/resetFilters' ?>" class="button special" >Reset</a></li>
                                 <li class="3u"><a class="button special" onclick="printDiv('print')" >Print</a></li>
                             </ul>
                         </div>
@@ -167,7 +167,7 @@ require_once(APPPATH . "libraries/functions.php");
                                 <th>Category</th>
                                 <th>Details</th>
                                 <th>Room No</th>
-                                <th>Complaint Type</th>
+                                <th>Type</th>
                                 <th>Contact</th>
                                 <th>Date</th>
                                 <th>Status</th>
