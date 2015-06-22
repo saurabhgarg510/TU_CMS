@@ -19,7 +19,7 @@ require_once(APPPATH . "libraries/functions.php");
         if ($status['counter'] != 0) {
             ?>
             <!---------------------------------------- POPUP start ------------------------->
-            <div id="fadeandscale" >
+            <div id="fadeandscale" style="text-align:center; width: 75%; padding: 0px;" >
                 <table style="text-align:left">
                     <tr>
                         <th>Name</th>
@@ -93,13 +93,13 @@ require_once(APPPATH . "libraries/functions.php");
         </div>
     </section>
 </div>
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!-- Include jQuery Popup Overlay -->
-<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
-<script defer>
-    $(document).ready(function() {
-        // Initialize the plugin
-        $('#fadeandscale').popup();
-        transition: 'all 0.3s'
-    });
-</script>
+<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize the plugin
+            $('#fadeandscale').popup({
+                transition: 'all 0.3s' //optional
+            });
+        });
+    </script>

@@ -10,6 +10,7 @@ class Admin extends CI_Controller {
         header("X-XSS-Protection: 1 mode=block ");
         header('X-Content-Type-Options: nosniff');
         header('X-Frame-Options: SAMEORIGIN');
+        header("Content-Security-Policy: script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval';");
         header("Cache-Control: no-cache");
         header("Pragma: no-cache");
         session_start();
@@ -20,6 +21,7 @@ class Admin extends CI_Controller {
             header('location:student');
             die();
         }
+        $this->load->model('Admin_model');
     }
 
     function format_date($str) {
@@ -77,8 +79,8 @@ class Admin extends CI_Controller {
             $sdate = date("Y-m-d H:i:s", strtotime($_SESSION['f_sdate']));
             $edate = date("Y-m-d H:i:s", strtotime($_SESSION['f_edate']));
         } else {
-            $sdate = '1970-01-01 05:30:00';
-            $edate = '1970-01-01 05:30:00';
+            $sdate = '1970-01-01 00:00:00';
+            $edate = '1970-01-01 00:00:00';
         }
         $sql = 'select * from complaints where ';
         if ($cat != "") {
@@ -96,9 +98,9 @@ class Admin extends CI_Controller {
         } else if ($stat != "") {
             $sql = $sql . "status = '" . $stat . "' ";
         }
-        if ($sql != 'select * from complaints where ' && $sdate != '1970-01-01 05:30:00' && $edate != '1970-01-01 05:30:00') {
+        if ($sql != 'select * from complaints where ' && $sdate != '1970-01-01 00:00:00' && $edate != '1970-01-01 00:00:00') {
             $sql = $sql . " and comp_date between '" . $sdate . "'  and DATE_ADD('" . $edate . "', INTERVAL 1 DAY)";
-        } else if ($sql == 'select * from complaints where ' && $sdate != '1970-01-01 05:30:00' && $edate != '1970-01-01 05:30:00') {
+        } else if ($sql == 'select * from complaints where ' && $sdate != '1970-01-01 00:00:00' && $edate != '1970-01-01 00:00:00') {
             $sql = $sql . "comp_date between '" . $sdate . "'  and DATE_ADD('" . $edate . "', INTERVAL 1 DAY)";
         } else if ($sql == 'select * from complaints where ') {
             $sql = 'select * from complaints  where status <>"Complete" ';
@@ -120,6 +122,20 @@ class Admin extends CI_Controller {
         $_SESSION['f_sdate'] = $this->input->get('f_sdate');
         $_SESSION['f_edate'] = $this->input->get('f_edate');
         redirect(base_url() . 'index.php/admin');
+    }
+
+    public function resetFilters() {
+	$temp=$_SESSION['fcat'];
+        unset($_SESSION['fcat'],$temp);
+	$temp=$_SESSION['fwing'];
+        unset($_SESSION['fwing'],$temp);
+	$temp=$_SESSION['fstat'];
+        unset($_SESSION['fstat'],$temp);
+	$temp=$_SESSION['f_sdate'];
+        unset($_SESSION['f_sdate'],$temp);
+	$temp=$_SESSION['f_edate'];
+        unset($_SESSION['f_edate'],$temp);
+        redirect(base_url().'index.php/admin');
     }
 
     public function popup() {
@@ -149,7 +165,6 @@ class Admin extends CI_Controller {
     public function insertCategory() {
         $data = $this->input->post();
         $this->Admin_model->addCat($data);
-        session_start();
         $_SESSION['stmt'] = TRUE;
         redirect(base_url() . 'index.php/admin/add_category');
     }
@@ -173,7 +188,6 @@ class Admin extends CI_Controller {
         //print_r($data);
         $cat = $data['category'];
         $this->Admin_model->deleteCat($cat);
-        session_start();
         $_SESSION['stmt'] = TRUE;
         redirect(base_url() . 'index.php/admin/del_category');
     }
@@ -215,7 +229,6 @@ class Admin extends CI_Controller {
         $oldpass = $this->input->post('oldpass');
         $pass = $this->input->post('pass');
         $repass = $this->input->post('repass');
-        session_start();
         $data = $this->Admin_model->getProfile();
         if (isset($oldpass)) {
             $salt = "thispasswordcannotbehacked";
@@ -227,7 +240,7 @@ class Admin extends CI_Controller {
 
             if (isset($pass) && isset($repass)) {
                 if ($pass == $repass)
-                    echo $_SESSION['matcherr'] = '';
+                    $_SESSION['matcherr'] = '';
                 else
                     $_SESSION['matcherr'] = "Passwords do not match. Please try again";
 
@@ -247,11 +260,13 @@ class Admin extends CI_Controller {
     }
 
     public function updateRemark() {
+        //
         $user = $_SESSION['compid'];
+        //print_r($user);
         if ($_POST['remark'] != '') {
             $remark = $this->string_validate($_POST['remark']);
             $remark = str_replace("'", '', $remark);
-            $sql = "insert into remarks(remark,comp_id,user_type,time) values('" . $remark . "','" . ucwords($user) . "' ,'" . $_SESSION['user_type'] . "','" . date('Y-m-d H:i:s') . "')";
+            $sql = "insert into remarks(remark,comp_id,user_type,time) values('" . $remark . "','" . $user . "' ,'" . ucfirst($_SESSION['user_type']) . "','" . date('Y-m-d H:i:s') . "')";
             $this->Admin_model->addRemark($sql);
         }
         if ($_POST['status'] != '') {

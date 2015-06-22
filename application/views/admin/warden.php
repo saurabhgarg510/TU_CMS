@@ -77,7 +77,7 @@ require_once(APPPATH . "libraries/functions.php");
                         <div class="4u">
                             <ul class="actions" >
                                 <li class="4u"><a onclick="document.getElementById('form').submit()" class="button special" >Search</a></li>
-                                <li class="3u" style="margin-right: 20px;"><a href="warden.php" class="button special" >Reset</a></li>
+                                <li class="3u" style="margin-right: 20px;"><a href="<?php base_url().'index.php/admin/resetFilters' ?>" class="button special" >Reset</a></li>
                                 <li class="3u"><a class="button special" onclick="printDiv('print')" >Print</a></li>
                             </ul>
                         </div>
@@ -88,7 +88,7 @@ require_once(APPPATH . "libraries/functions.php");
 
     <!---------------------------------------- POPUP start ------------------------->
 
-    <div id="fadeandscale" style="text-align:center; width: 75%; height: 600px; padding: 0px;">
+    <div id="fadeandscale" style="text-align:center; width: 75%; padding: 0px;">
 
         <table style="text-align:left">
             <tr>
@@ -121,7 +121,7 @@ require_once(APPPATH . "libraries/functions.php");
                             <br />
                             <div class="12u" style="<?php if ($_SESSION['user_type'] == "warden") echo 'display:none;'; ?>">
                                 Expected Completion Date
-                                <input type="date" name="cdate" id="complete" required/>
+                                <input type="date" name="cdate" id="complete" <?php if ($_SESSION['user_type'] != "warden") echo 'required'; ?>/>
                             </div><br />            
                             <div class="12u">
                                 <select class="dd" id="status" name="status">
@@ -167,7 +167,7 @@ require_once(APPPATH . "libraries/functions.php");
                                 <th>Category</th>
                                 <th>Details</th>
                                 <th>Room No</th>
-                                <th>Complaint Type</th>
+                                <th>Type</th>
                                 <th>Contact</th>
                                 <th>Date</th>
                                 <th>Status</th>
@@ -183,7 +183,7 @@ require_once(APPPATH . "libraries/functions.php");
                                     <td width="20%"><?php echo str_replace(array("\\r\\n", "\\r", "\\n"), "<br>", $val['details']); ?></td>
                                     <td><?php echo $val['roomno']; ?></td>
                                     <td><?php echo $val['comp_type']; ?></td>
-                                    <td><?php //echo $val1['contact'];      ?></td>
+                                    <td><?php echo $val['contact'];      ?></td>
                                     <td><?php echo format_date($val['comp_date']); ?></td>
                                     <td><?php
                                         if ($val['status'] == 'Pending') {
@@ -207,13 +207,13 @@ require_once(APPPATH . "libraries/functions.php");
 </div>
 </center>
 </section>
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <!-- Include jQuery Popup Overlay -->
-<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
-<script defer>
-    $(document).ready(function() {
-        // Initialize the plugin
-        $('#fadeandscale').popup();
-        transition: 'all 0.3s'
-    });
-</script>
+<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize the plugin
+            $('#fadeandscale').popup({
+                transition: 'all 0.3s' //optional
+            });
+        });
+    </script>

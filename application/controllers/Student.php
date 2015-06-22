@@ -9,6 +9,7 @@ class Student extends CI_Controller {
         header("X-XSS-Protection: 1 mode=block ");
         header('X-Content-Type-Options: nosniff');
         header('X-Frame-Options: SAMEORIGIN');
+        header("Content-Security-Policy: script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval';");
         header("Cache-Control: no-cache");
         header("Pragma: no-cache");
         session_start();
@@ -100,7 +101,7 @@ class Student extends CI_Controller {
     }
 
     function valid_pass($candidate) {
-        if (!preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
+        if (!preg_match_all('$\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
             return FALSE;
         return TRUE;
     }
