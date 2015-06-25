@@ -169,6 +169,37 @@ class Student extends CI_Controller {
         unset($_SESSION['passerr']);
         unset($_SESSION['olderr']);
     }
+ public function vote($page = 'poll1') {
+        if (!file_exists(APPPATH . '/views/student/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+           $data['query'] = $this->Student_model->getPoll();
+        $data['title'] = ucfirst($page);
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('student/' . $page, $data);
+        $this->load->view('templates/footer');
+      
+    }
+     public function pollx() {
+       
+      $data['vote'] = $this->input->get('vote');  
+      $data['z'] = $this->input->get('z');   
+      $y=$data['z'];
+      if(isset($_COOKIE["poll"."_".$y]))
+      {
+    $_SESSION['msg'] =  "You have already cast your vote.";
+      }
+      else
+      {
+      $this->Student_model->pollnewquery($data);
+      $_SESSION['msg'] = "You have successfully cast your vote.";
+      }
+      echo $_SESSION['msg'];
+       
+       
+      
+    }
 
     public function updateProfile() {
         $oldpass = $this->input->post('oldpass');

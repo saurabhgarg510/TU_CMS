@@ -68,7 +68,58 @@ class Admin_model extends CI_Model {
         }
         return $details;
     }
-
+ public function pollquery($data) {
+     $q=$data['ques'];
+      $x=$data['op1'];
+          $y=$data['op2'];
+          if($data['op3']!="")
+        $z=$data['op3'];
+          else
+              $z='NULL';
+         if($data['op4']!="")
+        $a=$data['op4'];
+          else
+              $a='NULL';
+       
+       $sql = "INSERT INTO newpoll(ques,op1,op2,op3,op4,poll_c1,poll_c2,poll_c3,poll_c4,switch,time_added) VALUES ('$q','$x','$y','$z','$a',0,0,0,0,1,CURRENT_TIMESTAMP)";
+       $this->db->query($sql);
+         
+        return $data;
+    }
+    public function pollnewquery() {
+     
+$queryTotalPoll = "SELECT *,poll_c1+poll_c2+poll_c3+poll_c4 as poll_count from newpoll";
+$result=$this->db->query($queryTotalPoll);
+$details = array();
+ foreach ($result->result_array() as $row) {
+     $data['ques'] = $row['ques'];
+            $data['op1'] = $row['op1'];
+            $data['op2'] = $row['op2'];
+            $data['op3'] = $row['op3'];
+            $data['op4'] = $row['op4'];
+     $data['poll_c1']=$row['poll_c1'];
+             $data['poll_c2']=$row['poll_c2'];
+     $data['poll_c3']=$row['poll_c3'];
+     $data['poll_c4']=$row['poll_c4'];
+            $data['pollsum'] = $row['poll_count'];
+            array_push($details, $data);            
+            //format_date($row['time']) . "(" . date("H:i:s", strtotime($row['time'])) . ")" . "," . $row['remark'];
+        }
+        return $details;
+    }
+    public function pollnewquery1() {
+    $queryDisplay = "SELECT ques,ans, poll_count from pollnew1,pollnew2 where pollnew1.id=pollnew2.id";
+$res1=$this->db->query($queryDisplay);
+ $details = array();
+ foreach ($res1->result_array() as $row) {
+            $data['ques'] = $row['ques'];
+            $data['ans'] = $row['ans'];
+            $data['poll_count'] = $row['poll_count'];
+            array_push($details, $data);            
+            //format_date($row['time']) . "(" . date("H:i:s", strtotime($row['time'])) . ")" . "," . $row['remark'];
+        }
+        return $details;
+    }
     function popData() {
         $sql = "SELECT * FROM complaints where comp_id = '" . $_SESSION['compid'] . "' order by comp_date desc";
         $result = $this->db->query($sql);
