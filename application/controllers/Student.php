@@ -52,8 +52,6 @@ class Student extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-
-        
         $data['category'] = $this->Student_model->getData();
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
@@ -79,7 +77,7 @@ class Student extends CI_Controller {
         if ($data['level'] == "room" || $data['level'] == "cluster")
             $data['flag'] = 1;
         //print_r($data);
-        
+
         $data['num_results'] = $this->Student_model->getNumCat($data['type']);
         $data['room'] = $this->Student_model->getRoom();
         $data['cluster'] = substr($data['room'], 0, 4);
@@ -91,7 +89,7 @@ class Student extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function addComp() {        
+    public function addComp() {
         $login = $this->Student_model->checkLoginCount();
         $data['status'] = $login;
         $data['title'] = 'Details';
@@ -131,7 +129,7 @@ class Student extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        
+
         $this->load->model('Admin_model');
         $data['status'] = $this->Student_model->getStatus();
         $sql = "select * from complaints where roomno = '" . $_SESSION['room'] . "'";
@@ -159,7 +157,7 @@ class Student extends CI_Controller {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        
+
         $data = $this->Student_model->getProfile();
         $data['title'] = ucfirst($page);
         $this->load->view('templates/user_header', $data);
@@ -169,42 +167,36 @@ class Student extends CI_Controller {
         unset($_SESSION['passerr']);
         unset($_SESSION['olderr']);
     }
- public function vote($page = 'poll1') {
+
+    public function vote($page = 'poll_student') {
         if (!file_exists(APPPATH . '/views/student/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-           $data['query'] = $this->Student_model->getPoll();
+        $data['query'] = $this->Student_model->getPoll();
         $data['title'] = ucfirst($page);
         $this->load->view('templates/user_header', $data);
         $this->load->view('student/' . $page, $data);
         $this->load->view('templates/footer');
-      
     }
-     public function pollx() {
-       
-      $data['vote'] = $this->input->get('vote');  
-      $data['z'] = $this->input->get('z');   
-      $y=$data['z'];
-      if(isset($_COOKIE["poll"."_".$y]))
-      {
-    $_SESSION['msg'] =  "You have already cast your vote.";
-      }
-      else
-      {
-      $this->Student_model->pollnewquery($data);
-      $_SESSION['msg'] = "You have successfully cast your vote.";
-      }
-      echo $_SESSION['msg'];
-       
-       
-      
+
+    public function pollx() {
+        $data['vote'] = $this->input->get('vote');
+        $data['z'] = $this->input->get('z');
+        $y = $data['z'];
+        if (isset($_COOKIE["poll" . "_" . $y])) {
+            $_SESSION['msg'] = "You have already cast your vote.";
+        } else {
+            $this->Student_model->addVote($data);
+            $_SESSION['msg'] = "You have successfully cast your vote.";
+        }
+        echo $_SESSION['msg'];
     }
 
     public function updateProfile() {
         $oldpass = $this->input->post('oldpass');
         $pass = $this->input->post('pass');
-        $repass = $this->input->post('repass');        
+        $repass = $this->input->post('repass');
         $data = $this->Student_model->getProfile();
         if (isset($oldpass)) {
 
@@ -225,7 +217,7 @@ class Student extends CI_Controller {
                     $_SESSION['passerr'] = '';
                     $salt = "thispasswordcannotbehacked";
                     $pass = hash('sha256', $salt . $pass);
-                    
+
                     $this->Student_model->updatePro($pass);
                 } else
                     $_SESSION['passerr'] = "Password is not valid. ";

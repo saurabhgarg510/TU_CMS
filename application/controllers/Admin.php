@@ -52,7 +52,7 @@ class Admin extends CI_Controller {
         $str1 = str_replace("%", "p", "$str");
         return $this->db->escape($str1);
     }
-    
+
     function valid_pass($candidate) {
         if (!preg_match_all('$\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
             return FALSE;
@@ -125,17 +125,17 @@ class Admin extends CI_Controller {
     }
 
     public function resetFilters() {
-	$temp=$_SESSION['fcat'];
-        unset($_SESSION['fcat'],$temp);
-	$temp=$_SESSION['fwing'];
-        unset($_SESSION['fwing'],$temp);
-	$temp=$_SESSION['fstat'];
-        unset($_SESSION['fstat'],$temp);
-	$temp=$_SESSION['f_sdate'];
-        unset($_SESSION['f_sdate'],$temp);
-	$temp=$_SESSION['f_edate'];
-        unset($_SESSION['f_edate'],$temp);
-        redirect(base_url().'index.php/admin');
+        $temp = $_SESSION['fcat'];
+        unset($_SESSION['fcat'], $temp);
+        $temp = $_SESSION['fwing'];
+        unset($_SESSION['fwing'], $temp);
+        $temp = $_SESSION['fstat'];
+        unset($_SESSION['fstat'], $temp);
+        $temp = $_SESSION['f_sdate'];
+        unset($_SESSION['f_sdate'], $temp);
+        $temp = $_SESSION['f_edate'];
+        unset($_SESSION['f_edate'], $temp);
+        redirect(base_url() . 'index.php/admin');
     }
 
     public function popup() {
@@ -161,31 +161,33 @@ class Admin extends CI_Controller {
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
     }
-     public function newpoll($page = 'poll') {
+
+    public function newpoll($page = 'poll') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $data['title'] = 'Poll';
+        $data['title'] = 'New Poll';
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
     }
-     public function pollres($page = 'pollnew1') {
+
+    public function pollresult($page = 'poll_result') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        $data['title'] = 'Poll';
-        $data['query']=$this->Admin_model->pollnewquery();
+        $data['title'] = 'Poll Results';
+        $data['query'] = $this->Admin_model->pollnewquery();
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
     }
-  
-     public function insertCategory() {
+
+    public function insertCategory() {
         $data = $this->input->post();
         $this->Admin_model->addCat($data);
         $_SESSION['stmt'] = TRUE;
@@ -193,34 +195,35 @@ class Admin extends CI_Controller {
     }
 
     public function pollindex($page = 'pollnew2') {
-         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-        
-          $data['ques'] = $this->input->post('ques');
+
+        $data['ques'] = $this->input->post('ques');
         $data['op1'] = $this->input->post('op1');
         $data['op2'] = $this->input->post('op2');
-         $data['op3'] = $this->input->post('op3');
+        $data['op3'] = $this->input->post('op3');
         $data['op4'] = $this->input->post('op4');
-        $newdata=$this->Admin_model->pollquery($data);
+        $newdata = $this->Admin_model->pollquery($data);
         $_SESSION['stmt'] = TRUE;
-       $data['title'] = 'Pollnew';
+        $data['title'] = 'Pollnew';
         $this->load->view('templates/user_header', $newdata);
         $this->load->view('admin/' . $page, $newdata);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
     }
-      public function pollx($page = 'pollnew1') {
-         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+
+    public function pollx($page = 'poll_result') {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
-  $data['vote'] = $this->input->get('vote');      
-        $data['query2']=$this->Admin_model->pollnewquery($data);
-        $data['query']=$this->Admin_model->pollnewquery1();
+        $data['vote'] = $this->input->get('vote');
+        $data['query2'] = $this->Admin_model->pollnewquery($data);
+        $data['query'] = $this->Admin_model->pollnewquery1();
         $_SESSION['stmt'] = TRUE;
-       $data['title'] = 'Pollnew1';
+        $data['title'] = 'Poll Result';
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');

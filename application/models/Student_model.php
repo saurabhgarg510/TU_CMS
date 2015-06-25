@@ -64,31 +64,7 @@ class Student_model extends CI_Model {
         $data['contact'] = $row1->contact;
         return $data;
     }
-  public function getPoll() {
-      $query = "select * from newpoll";
-        $result = $this->db->query($query);
-        $data = array();
-        foreach ($result->result_array() as $row) {
-            $det['id'] = $row['id'];
-            $det['ques'] = $row['ques'];
-            $det['op1'] = $row['op1'];
-            $det['op2'] = $row['op2'];
-            $det['op3'] = $row['op3'];
-            $det['op4'] = $row['op4'];
-            array_push($data, $det);
-        }
-        return $data;
-    }
- public function pollnewquery($data) {
-      $setPollId = 2;
-      $x=$data['vote'];
-      $y=$data['z'];
-      $new="poll_c".$x;
-     $sql="update newpoll set $new=$new+1 where id='".$y."'";
-     $this->db->query($sql);
-$expire=time()+60*60*24*30;
-setcookie("poll"."_".$y, "poll"."_".$y, $expire);
- }
+
     public function updatePro($pass) {
         $query = "update login set pass = '" . $pass . "' where email = '" . $_SESSION['email'] . "'";
         $this->db->query($query);
@@ -146,6 +122,34 @@ setcookie("poll"."_".$y, "poll"."_".$y, $expire);
         unset($_SESSION['msg']);
         unset($_SESSION['level']);
         return 'SUCCESS';
+    }
+
+    public function getPoll() {
+        $query = "select * from newpoll";
+        $result = $this->db->query($query);
+        $data = array();
+        foreach ($result->result_array() as $row) {
+            $det['id'] = $row['id'];
+            $det['ques'] = $row['ques'];
+            $det['op1'] = $row['op1'];
+            $det['op2'] = $row['op2'];
+            $det['op3'] = $row['op3'];
+            $det['op4'] = $row['op4'];
+            array_push($data, $det);
+        }
+        return $data;
+    }
+
+    public function addVote($data) {
+        //what are x,y,z ??
+        $setPollId = 2;
+        $x = $data['vote'];
+        $y = $data['z'];
+        $new = "poll_c" . $x;
+        $sql = "update newpoll set $new=$new+1 where id='" . $y . "'";
+        $this->db->query($sql);
+        $expire = time() + 60 * 60 * 24 * 30;
+        setcookie("poll" . "_" . $y, "poll" . "_" . $y, $expire);
     }
 
 }

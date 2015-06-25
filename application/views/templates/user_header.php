@@ -59,7 +59,7 @@
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/del_category">Delete Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/clean_database">Clear Database</a></li>
                                  <li><a href="<?php echo base_url(); ?>index.php/admin/newpoll">Poll</a></li>
-                                 <li><a href="<?php echo base_url(); ?>index.php/admin/pollres">PollResults</a></li>
+                                 <li><a href="<?php echo base_url(); ?>index.php/admin/pollresult">PollResults</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
 <?php } ?>
