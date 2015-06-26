@@ -83,7 +83,15 @@ class Admin_model extends CI_Model {
        
        $sql = "INSERT INTO newpoll(ques,op1,op2,op3,op4,poll_c1,poll_c2,poll_c3,poll_c4,switch,time_added) VALUES ('$q','$x','$y','$z','$a',0,0,0,0,1,CURRENT_TIMESTAMP)";
        $this->db->query($sql);
-         
+         $sql1="select id from newpoll where ques='$q'";
+       $result=  $this->db->query($sql1);
+       $row = $result->row();
+        $idnew = $row->id;
+        for($i=0;$i<$idnew;$i++)
+        {
+            $sql2="update newpoll set switch=0 where id='$i'";
+            $this->db->query($sql2);
+        }
         return $data;
     }
     public function pollresquery() {

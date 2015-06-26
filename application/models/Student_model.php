@@ -125,7 +125,7 @@ class Student_model extends CI_Model {
     }
 
     public function getPoll() {
-        $query = "select * from newpoll";
+        $query = "select * from newpoll where switch=1";
         $result = $this->db->query($query);
         $data = array();
         foreach ($result->result_array() as $row) {
