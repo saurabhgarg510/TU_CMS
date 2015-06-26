@@ -2,8 +2,8 @@
     <header>
         <h3 style="margin-bottom:0px;">Add a new poll</h3>
         <?php
-        if (isset($_SESSION['stmt'])) {
-            echo "<p style=\"margin-bottom:0px;\">Category Deleted Successfully! </p>";
+        if (isset($_SESSION['flag'])) {
+            echo "<p style=\"margin-bottom:0px;\">Poll Added Successfully! </p>";
         }
         ?>
     </header>

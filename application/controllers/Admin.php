@@ -194,12 +194,8 @@ class Admin extends CI_Controller {
         redirect(base_url() . 'index.php/admin/add_category');
     }
 
-    public function pollinsert($page = 'pollinsert1') {
-        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
-            show_404();
-        }
-
+    public function pollinsert() {
+    
         $data['ques'] = $this->input->post('ques');
         $data['op1'] = $this->input->post('op1');
         $data['op2'] = $this->input->post('op2');
@@ -207,11 +203,9 @@ class Admin extends CI_Controller {
         $data['op4'] = $this->input->post('op4');
         $newdata = $this->Admin_model->pollinsertquery($data);
         $_SESSION['stmt'] = TRUE;
-        $data['title'] = 'Pollnew';
-        $this->load->view('templates/user_header', $newdata);
-        $this->load->view('admin/' . $page, $newdata);
-        $this->load->view('templates/footer');
+      $_SESSION['flag'] = 1;
         unset($_SESSION['stmt']);
+        redirect(base_url() . 'index.php/admin/newpoll');
     }
 
     
