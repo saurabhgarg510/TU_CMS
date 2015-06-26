@@ -180,7 +180,7 @@ class Admin extends CI_Controller {
             show_404();
         }
         $data['title'] = 'Poll Results';
-        $data['query'] = $this->Admin_model->pollnewquery();
+        $data['query'] = $this->Admin_model->pollresquery();
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
@@ -194,7 +194,7 @@ class Admin extends CI_Controller {
         redirect(base_url() . 'index.php/admin/add_category');
     }
 
-    public function pollindex($page = 'pollnew2') {
+    public function pollinsert($page = 'pollinsert1') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
@@ -205,7 +205,7 @@ class Admin extends CI_Controller {
         $data['op2'] = $this->input->post('op2');
         $data['op3'] = $this->input->post('op3');
         $data['op4'] = $this->input->post('op4');
-        $newdata = $this->Admin_model->pollquery($data);
+        $newdata = $this->Admin_model->pollinsertquery($data);
         $_SESSION['stmt'] = TRUE;
         $data['title'] = 'Pollnew';
         $this->load->view('templates/user_header', $newdata);
@@ -214,21 +214,7 @@ class Admin extends CI_Controller {
         unset($_SESSION['stmt']);
     }
 
-    public function pollx($page = 'poll_result') {
-        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
-            show_404();
-        }
-        $data['vote'] = $this->input->get('vote');
-        $data['query2'] = $this->Admin_model->pollnewquery($data);
-        $data['query'] = $this->Admin_model->pollnewquery1();
-        $_SESSION['stmt'] = TRUE;
-        $data['title'] = 'Poll Result';
-        $this->load->view('templates/user_header', $data);
-        $this->load->view('admin/' . $page, $data);
-        $this->load->view('templates/footer');
-        unset($_SESSION['stmt']);
-    }
+    
 
     public function del_category($page = 'delete') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {

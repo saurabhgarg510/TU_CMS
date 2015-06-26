@@ -9,7 +9,7 @@
     </header>
     <div class="box">
 
-        <form action="<?php echo base_url(); ?>index.php/admin/pollindex" method="post">
+        <form action="<?php echo base_url(); ?>index.php/admin/pollinsert" method="post">
             <input type="text" name="ques" placeholder="Enter the question here..."><br>
             <input type="text" name="op1" placeholder="Option 1: "><br>
             <input type="text" name="op2" placeholder="Option 2: "><br>
