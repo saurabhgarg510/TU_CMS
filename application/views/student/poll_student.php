@@ -5,37 +5,37 @@
     <div class="box">
 
         <?php foreach ($query as $ro) { ?>
-            
-                <div id="pollDisplay">
-                    <form><h3><?php echo $ro['ques']; ?>?</h3>
-                        <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($ro['id']); ?>">
-                        <input type="radio" name="poll_option" id="1" class="poll_sys" value="1">
+
+            <div id="pollDisplay">
+                <form><h3><?php echo $ro['ques']; ?>?</h3>
+                    <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($ro['id']); ?>">
+                    <input type="radio" name="poll_option" id="1" class="poll_sys" value="1">
+                    <label><?php
+                        echo $ro['op1'];
+                        ?></label>
+                    <br>
+                    <input type="radio" name="poll_option" id="2" class="poll_sys" value="2">
+                    <label><?php
+                        echo $ro['op2'];
+                        ?></label>
+                    <br>
+                    <?php if ($ro['op3'] != 'NULL') { ?>
+                        <input type="radio" name="poll_option" id="3" class="poll_sys" value="3">
                         <label><?php
-                            echo $ro['op1'];
+                            echo $ro['op3'];
                             ?></label>
                         <br>
-                        <input type="radio" name="poll_option" id="2" class="poll_sys" value="2">
+                    <?php } ?>
+                    <?php if ($ro['op3'] != 'NULL') { ?>
+                        <input type="radio" name="poll_option" id="4" class="poll_sys" value="4">
                         <label><?php
-                            echo $ro['op2'];
+                            echo $ro['op4'];
                             ?></label>
                         <br>
-                        <?php if ($ro['op3'] != 'NULL') { ?>
-                            <input type="radio" name="poll_option" id="3" class="poll_sys" value="3">
-                            <label><?php
-                                echo $ro['op3'];
-                                ?></label>
-                            <br>
-                        <?php } ?>
-                        <?php if ($ro['op3'] != 'NULL') { ?>
-                            <input type="radio" name="poll_option" id="4" class="poll_sys" value="4">
-                            <label><?php
-                                echo $ro['op4'];
-                                ?></label>
-                            <br>
-                        <?php } ?>
-                            <button class="button special" onclick="return submitPoll('<?php echo htmlspecialchars($ro['id']); ?>');" name="poll" >Submit Vote</button>
-                    </form>
-                </div>
+                    <?php } ?>
+                    <button class="button special" onclick="return submitPoll('<?php echo htmlspecialchars($ro['id']); ?>');" name="poll" >Submit Vote</button>
+                </form>
+            </div>
         <?php } ?>
     </div>
 </section>

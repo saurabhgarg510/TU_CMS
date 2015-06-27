@@ -45,7 +45,6 @@
                                 <li><a href="<?php echo base_url(); ?>index.php/student">New Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/status">View Status</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/profile">Account Settings</a></li>
-                                  <li><a href="<?php echo base_url(); ?>index.php/student/vote">Poll</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
                                 <?php
                             } else if ($_SESSION['user_type'] == 'caretaker') {

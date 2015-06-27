@@ -139,6 +139,11 @@ class Student_model extends CI_Model {
         }
         return $data;
     }
+       public function checkPoll() {
+        $result = $this->db->query("select poll from login where email ='" . $_SESSION['email'] . "'");
+        $data['poll']=$result->row()->poll;
+        return $data;
+    }
 
     public function addVote($data) {
         //what are x,y,z ??
@@ -148,6 +153,8 @@ class Student_model extends CI_Model {
         $new = "poll_c" . $x;
         $sql = "update newpoll set $new=$new+1 where id='" . $y . "'";
         $this->db->query($sql);
+        $sqlpoll = "update login set poll=1 where email ='" . $_SESSION['email'] . "'";
+        $this->db->query($sqlpoll);
         $expire = time() + 60 * 60 * 24 * 30;
         setcookie("poll" . "_" . $y, "poll" . "_" . $y, $expire);
     }

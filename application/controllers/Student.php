@@ -53,6 +53,7 @@ class Student extends CI_Controller {
             show_404();
         }
         $data['category'] = $this->Student_model->getData();
+        $data['pollcheck']=$this->Student_model->checkPoll();
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
         $this->load->view('templates/user_header', $data);
@@ -121,7 +122,8 @@ class Student extends CI_Controller {
         $str = filter_var($str, FILTER_SANITIZE_STRING);
         $str1 = str_replace("%", "p", "$str");
         /* @var $mysqli type */
-        return $this->db->escape($str1);
+        $str1 = $this->db->escape($str1);
+        return str_replace("'", "", $str1);
     }
 
     public function status($page = 'status') {
@@ -181,15 +183,11 @@ class Student extends CI_Controller {
     }
 
     public function pollx() {
-        $data['vote'] = $this->input->get('vote');
+        $data['vote'] = $this->string_validate($this->input->get('vote'));
         $data['z'] = $this->input->get('z');
         $y = $data['z'];
-        if (isset($_COOKIE["poll" . "_" . $y])) {
-            $_SESSION['msg'] = "You have already cast your vote.";
-        } else {
             $this->Student_model->addVote($data);
             $_SESSION['msg'] = "You have successfully cast your vote.";
-        }
         echo $_SESSION['msg'];
     }
 

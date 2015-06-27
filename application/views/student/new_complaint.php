@@ -1,4 +1,5 @@
 <!-- Main -->
+
 <section id="main" class="container small">
     <header>
         <h2>New complaint</h2>
@@ -50,6 +51,8 @@
             </div>
         </form>
     </div>
-
 </section>
+<?php if($pollcheck['poll']==0){ ?>
+<a href="<?php echo base_url(); ?>index.php/student/vote" >Poll</a>
+<?php } ?>
 <script src="<?php echo base_url(); ?>public/js/minified/student.js"></script>

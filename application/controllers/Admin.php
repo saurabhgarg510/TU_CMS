@@ -47,10 +47,12 @@ class Admin extends CI_Controller {
         return $date;
     }
 
-    function string_validate($str) {
+    public function string_validate($str) {
         $str = filter_var($str, FILTER_SANITIZE_STRING);
         $str1 = str_replace("%", "p", "$str");
-        return $this->db->escape($str1);
+        /* @var $mysqli type */
+        $str1 = $this->db->escape($str1);
+        return str_replace("'", "", $str1);
     }
 
     function valid_pass($candidate) {
@@ -171,7 +173,8 @@ class Admin extends CI_Controller {
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
-        unset($_SESSION['stmt']);
+        unset($_SESSION['flag']);
+        unset($_SESSION['queserr']);
     }
 
     public function pollresult($page = 'poll_result') {
@@ -184,7 +187,21 @@ class Admin extends CI_Controller {
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
-        unset($_SESSION['stmt']);
+    }
+
+    public function pollinsert() {
+        $data['ques'] = $this->string_validate($this->input->post('ques'));
+        $data['op1'] = $this->string_validate($this->input->post('op1'));
+        $data['op2'] = $this->string_validate($this->input->post('op2'));
+        $data['op3'] = $this->string_validate($this->input->post('op3'));
+        $data['op4'] = $this->string_validate($this->input->post('op4'));
+        if ($data['ques'] == '' || $data['op1'] == '' || $data['op2'] == '')
+            $_SESSION['queserr'] = 'Question, Option 1 and Option 2 are mandatory';
+        else {
+            $newdata = $this->Admin_model->pollinsertquery($data);
+            $_SESSION['flag'] = 1;
+        }
+        redirect(base_url() . 'index.php/admin/newpoll');
     }
 
     public function insertCategory() {
@@ -193,22 +210,6 @@ class Admin extends CI_Controller {
         $_SESSION['stmt'] = TRUE;
         redirect(base_url() . 'index.php/admin/add_category');
     }
-
-    public function pollinsert() {
-    
-        $data['ques'] = $this->input->post('ques');
-        $data['op1'] = $this->input->post('op1');
-        $data['op2'] = $this->input->post('op2');
-        $data['op3'] = $this->input->post('op3');
-        $data['op4'] = $this->input->post('op4');
-        $newdata = $this->Admin_model->pollinsertquery($data);
-        $_SESSION['stmt'] = TRUE;
-      $_SESSION['flag'] = 1;
-        unset($_SESSION['stmt']);
-        redirect(base_url() . 'index.php/admin/newpoll');
-    }
-
-    
 
     public function del_category($page = 'delete') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {

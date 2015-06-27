@@ -11,10 +11,11 @@
 
         <form action="<?php echo base_url(); ?>index.php/admin/pollinsert" method="post">
             <input type="text" name="ques" placeholder="Enter the question here..."><br>
-            <input type="text" name="op1" placeholder="Option 1: "><br>
-            <input type="text" name="op2" placeholder="Option 2: "><br>
-            <input type="text" name="op3" placeholder="Option 3: "><br>
-            <input type="text" name="op4" placeholder="Option 4: "><br>
+            <font color="red"><?php if (isset($_SESSION['queserr'])) echo $_SESSION['queserr']; ?></font>
+            <input type="text" name="op1" placeholder="Option 1: " required><br>
+            <input type="text" name="op2" placeholder="Option 2: " required><br>
+            <input type="text" name="op3" placeholder="Option 3: (Optional)"><br>
+            <input type="text" name="op4" placeholder="Option 4: (Optional)"><br>
             <input type="submit">
         </form>
     </div>
