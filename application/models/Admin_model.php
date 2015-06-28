@@ -99,6 +99,7 @@ class Admin_model extends CI_Model {
         $result = $this->db->query($queryTotalPoll);
         $details = array();
         foreach ($result->result_array() as $row) {
+             $data['id'] = $row['id'];
             $data['ques'] = $row['ques'];
             $data['op1'] = $row['op1'];
             $data['op2'] = $row['op2'];
@@ -114,7 +115,22 @@ class Admin_model extends CI_Model {
         }
         return $details;
     }
-
+   public function pollresquery1($data) {
+       $x=$data['id'];
+        $queryTotalPoll = "SELECT * from newpoll where id='$x'";
+        $result = $this->db->query($queryTotalPoll);
+            $data['ques'] = $result->row()->ques;
+            $data['op1'] = $result->row()->op1;
+            $data['op2'] = $result->row()->op2;
+            $data['op3'] = $result->row()->op3;
+            $data['op4'] = $result->row()->op4;
+            $data['poll_c1'] = $result->row()->poll_c1;
+            $data['poll_c2'] = $result->row()->poll_c2;
+            $data['poll_c3'] = $result->row()->poll_c3;
+            $data['poll_c4'] = $result->row()->poll_c4;
+         
+        return $data;
+    }
     function popData() {
         $sql = "SELECT * FROM complaints where comp_id = '" . $_SESSION['compid'] . "' order by comp_date desc";
         $result = $this->db->query($sql);

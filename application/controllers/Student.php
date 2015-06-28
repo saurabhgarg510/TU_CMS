@@ -54,6 +54,7 @@ class Student extends CI_Controller {
         }
         $data['category'] = $this->Student_model->getData();
         $data['pollcheck']=$this->Student_model->checkPoll();
+          $data['query']=$this->Student_model->getPoll();
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
         $this->load->view('templates/user_header', $data);
@@ -140,6 +141,7 @@ class Student extends CI_Controller {
         $this->load->view('templates/user_header', $data);
         $this->load->view('student/' . $page, $data);
     }
+    
 
     public function popup() {
         $_SESSION['compid'] = $this->input->post('send');
