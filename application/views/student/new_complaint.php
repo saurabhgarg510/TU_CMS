@@ -53,7 +53,7 @@
     </div>
 </section>
 <?php if ($pollcheck['poll'] == 0) { ?>
-    <div id="fadeandscale">
+<div id="fadeandscale" style="">
         <div id="pollDisplay" class="box">
             <form><h3><?php echo $query['ques']; ?>?</h3>
                 <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($query['id']); ?>">

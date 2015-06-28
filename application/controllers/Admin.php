@@ -203,20 +203,22 @@ class Admin extends CI_Controller {
         }
         redirect(base_url() . 'index.php/admin/newpoll');
     }
-public function pollgraph($page = 'poll_result1') {
+
+    public function pollgraph($page = 'poll_result1') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'poll_result1';
         $data['id'] = $this->input->get('z');
-        $data = $this->Admin_model->pollresquery1($data) ;
+        $data = $this->Admin_model->pollresquery1($data);
         //	print_r($data);
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
         unset($_SESSION['stmt']);
     }
+
     public function insertCategory() {
         $data = $this->input->post();
         $this->Admin_model->addCat($data);
@@ -278,6 +280,7 @@ public function pollgraph($page = 'poll_result1') {
         unset($_SESSION['matcherr']);
         unset($_SESSION['passerr']);
         unset($_SESSION['olderr']);
+        unset($_SESSION['success']);
     }
 
     public function updateProfile() {

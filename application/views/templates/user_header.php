@@ -41,7 +41,7 @@
                         if (!isset($_SESSION['id']))
                             header('location:home');
                         ?>
-                        <a href="" class="icon fa-angle-down"><?php echo $_SESSION['name']; ?></a>
+                        <a href="" class="icon fa-angle-down"><?php echo ucfirst($_SESSION['name']); ?></a>
                         <ul><?php if ($_SESSION['user_type'] == 'student') { ?>
                                 <li><a href="<?php echo base_url(); ?>index.php/student">New Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/status">View Status</a></li>

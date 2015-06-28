@@ -169,6 +169,7 @@ class Student extends CI_Controller {
         unset($_SESSION['matcherr']);
         unset($_SESSION['passerr']);
         unset($_SESSION['olderr']);
+        unset($_SESSION['success']);
     }
 
     public function vote($page = 'poll_student') {
