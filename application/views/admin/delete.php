@@ -1,4 +1,4 @@
-<section id="main" class="container small" >
+<section id="main" class="container 75%" >
     <header>
         <h3 style="margin-bottom:0px;">Remove complaint category</h3>
         <?php

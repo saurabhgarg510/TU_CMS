@@ -1,7 +1,7 @@
 <script src="<?php echo base_url(); ?>public/js/minified/login_js.js"></script>
 
 <!-- Main -->
-<section id="main" class="container small" >
+<section id="main" class="container 75%" >
 
     <header>
         <h2>Sign In</h2>

@@ -1,6 +1,6 @@
 <!-- Main -->
 
-<section id="main" class="container 8u">
+<section id="main" class="container" style="padding-bottom: 0">
     <header>
         <h2>New complaint</h2>
     </header>
@@ -16,7 +16,7 @@
         ?>
     </ul>
 </section>
-<section class="container small">
+<section id="main" class="container 75%" style="padding-top: 0">
     <div class="box">
 
         <form method="post" action="<?php echo base_url(); ?>index.php/student/check" name="complaint" id="complaint">

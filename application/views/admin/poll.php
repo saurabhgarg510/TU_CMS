@@ -1,4 +1,4 @@
-<section id="main" class="container small" >
+<section id="main" class="container 75%" >
     <header>
         <h3 style="margin-bottom:0px;">Add a new poll</h3>
         <?php
@@ -8,7 +8,6 @@
         ?>
     </header>
     <div class="box">
-
         <form action="<?php echo base_url(); ?>index.php/admin/pollinsert" method="post">
             <input type="text" name="ques" placeholder="Enter the question here..."><br>
             <font color="red"><?php if (isset($_SESSION['queserr'])) echo $_SESSION['queserr']; ?></font>

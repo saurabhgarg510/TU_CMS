@@ -9,7 +9,7 @@
         <li>The status will be changed to WAITING once the caretaker forwards the complaint to the concerned person. You will be updated with the current status and expected completion day.</li>
         <li>Once solved, the status will be updated to COMPLETED</li>
         <li>If you are still experiencing problems on the same, add a new complaint giving complaint id of previous complaint for reference.</li>
-        <li>We know how restless you can become if your complaint is not being resolved. You can always contact the warden at warden@onlinehostelj.in</li>
+        <li>We know how restless you can become if your complaint is not being resolved. You can always contact the warden at wardenj@thapar.edu</li>
         <li>The warden will change the status to URGENT and your complaint will be resolved on priority basis.</li>
     </ol>
     <h3>General Instructions</h3>
@@ -19,9 +19,5 @@
         <li>Please drop your feedback about our little operation. We value your feedback. </li>
         <li>For any other query, feel free to contact us on: developer@onlinehostelj.in</li>
     </ol>
-    <br>
-
     Happy Complaining!! ;)
-
-
 </section>
