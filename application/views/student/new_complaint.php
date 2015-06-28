@@ -1,6 +1,6 @@
 <!-- Main -->
 
-<section id="main" class="container small">
+<section id="main" class="container 8u">
     <header>
         <h2>New complaint</h2>
     </header>
@@ -52,84 +52,84 @@
         </form>
     </div>
 </section>
-<?php if($pollcheck['poll']==0){ ?>
-<section id="main" class="container" >
-    <header>
-        <h3 style="margin-bottom:0px;">Active Polls</h3>
-    </header>
-    <div class="box">
-
-        <?php foreach ($query as $ro) { ?>
-
-            <div id="pollDisplay">
-                <form><h3><?php echo $ro['ques']; ?>?</h3>
-                    <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($ro['id']); ?>">
-                    <input type="radio" name="poll_option" id="1" class="poll_sys" value="1">
-                    <label><?php
-                        echo $ro['op1'];
+<?php if ($pollcheck['poll'] == 0) { ?>
+    <div id="fadeandscale">
+        <div id="pollDisplay" class="box">
+            <form><h3><?php echo $query['ques']; ?>?</h3>
+                <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($query['id']); ?>">
+                <input type="radio" name="poll_option" id="1" class="poll_sys" value="1">
+                <label for="1"><?php
+                    echo $query['op1'];
+                    ?></label>
+                <br>
+                <input type="radio" name="poll_option" id="2" class="poll_sys" value="2">
+                <label for="2"><?php
+                    echo $query['op2'];
+                    ?></label>
+                <br>
+                <?php if ($query['op3'] != 'NULL') { ?>
+                    <input type="radio" name="poll_option" id="3" class="poll_sys" value="3">
+                    <label for="3"><?php
+                        echo $query['op3'];
                         ?></label>
                     <br>
-                    <input type="radio" name="poll_option" id="2" class="poll_sys" value="2">
-                    <label><?php
-                        echo $ro['op2'];
+                <?php } ?>
+                <?php if ($query['op4'] != 'NULL') { ?>
+                    <input type="radio" name="poll_option" id="4" class="poll_sys" value="4">
+                    <label for="4"><?php
+                        echo $query['op4'];
                         ?></label>
                     <br>
-                    <?php if ($ro['op3'] != 'NULL') { ?>
-                        <input type="radio" name="poll_option" id="3" class="poll_sys" value="3">
-                        <label><?php
-                            echo $ro['op3'];
-                            ?></label>
-                        <br>
-                    <?php } ?>
-                    <?php if ($ro['op3'] != 'NULL') { ?>
-                        <input type="radio" name="poll_option" id="4" class="poll_sys" value="4">
-                        <label><?php
-                            echo $ro['op4'];
-                            ?></label>
-                        <br>
-                    <?php } ?>
-                    <button class="button special" onclick="return submitPoll('<?php echo htmlspecialchars($ro['id']); ?>');" name="poll" >Submit Vote</button>
-                </form>
-            </div>
-        <?php } ?>
+                <?php } ?>
+                <button class="button special" onclick="return submitPoll('<?php echo htmlspecialchars($query['id']); ?>');" name="poll" >Submit Vote</button>
+            </form>
+        </div>
     </div>
-</section>
+    <div><button class="fadeandscale_open " id="pop" style="display:none">pop</button></div>
 
-<script>
-    function submitPoll(id) {
-        var radios = $(".poll_sys");
-        var checked = '';
-        for (var i = 0; i < radios.length; i++) {
-            if (radios[i].checked) {
-                var checked = 'checked';
+    <script>
+        function submitPoll(id) {
+            var radios = $(".poll_sys");
+            var checked = '';
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    var checked = 'checked';
+                }
             }
-        }
-        if (checked == '') {
-            alert("Please select an Option to participate in the poll");
-            radios[0].focus();
+            if (checked == '') {
+                alert("Please select an Option to participate in the poll");
+                radios[0].focus();
+                return false;
+            }
+
+            var radiovalue = $('input[name="poll_option"]:checked').val();
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.onreadystatechange = function()
+            {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("pollDisplay").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "<?php echo base_url(); ?>index.php/student/pollx?vote=" + radiovalue + "&z=" + id, true);
+            xmlhttp.send();
             return false;
         }
-
-        var radiovalue = $('input[name="poll_option"]:checked').val();
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlhttp.onreadystatechange = function()
-        {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("pollDisplay").innerHTML = xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET", "<?php echo base_url(); ?>index.php/student/pollx?vote=" + radiovalue + "&z=" + id, true);
-        xmlhttp.send();
-        return false;
-    }
-</script>
+    </script>
 <?php } ?>
 <script src="<?php echo base_url(); ?>public/js/minified/student.js"></script>
+<script>
+        $(document).ready(function() {
+            // Initialize the plugin
+            $('#fadeandscale').popup();
+            transition: 'all 0.3s'
+            $('#pop').trigger('click');
+        });
+</script>

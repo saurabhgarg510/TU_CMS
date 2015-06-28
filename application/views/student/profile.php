@@ -1,20 +1,3 @@
-<script language="javascript" defer>
-    function passwordChanged(id) {
-        var strength = document.getElementById(id);
-        var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&*]).*$", "g");
-        var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
-        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
-        var pwd = document.getElementById(id);
-        if (strongRegex.test(pwd.value)) {
-            strength.className = "strong";
-        } else if (mediumRegex.test(pwd.value)) {
-            strength.className = "medium";
-        } else {
-            strength.className = "weak";
-        }
-    }
-</script>
-
 <!-- Main -->
 <section id="main" class="container small">
     <header>
@@ -79,16 +62,30 @@
         </form>
     </div>
 </section>
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<!-- Include jQuery Popup Overlay -->
-<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" defer></script>
-<script defer>
+<script >
     $(document).ready(function() {
         // Initialize the plugin
         $('#fadeandscale').popup();
         transition: 'all 0.3s'
     });
 </script>
+<script language="javascript" defer>
+    function passwordChanged(id) {
+        var strength = document.getElementById(id);
+        var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&*]).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var enoughRegex = new RegExp("(?=.{6,}).*", "g");
+        var pwd = document.getElementById(id);
+        if (strongRegex.test(pwd.value)) {
+            strength.className = "strong";
+        } else if (mediumRegex.test(pwd.value)) {
+            strength.className = "medium";
+        } else {
+            strength.className = "weak";
+        }
+    }
+</script>
+
 <?php
 if (isset($_SESSION['success'])) {
                             echo "<script>$(document).ready(function() {

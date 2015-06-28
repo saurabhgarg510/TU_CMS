@@ -127,27 +127,24 @@ class Student_model extends CI_Model {
     public function getPoll() {
         $query = "select * from newpoll where switch=1";
         $result = $this->db->query($query);
-        $data = array();
-        foreach ($result->result_array() as $row) {
-            $det['id'] = $row['id'];
-            $det['ques'] = $row['ques'];
-            $det['op1'] = $row['op1'];
-            $det['op2'] = $row['op2'];
-            $det['op3'] = $row['op3'];
-            $det['op4'] = $row['op4'];
-            array_push($data, $det);
-        }
+        $row = $result->row_array();
+        $data['id'] = $row['id'];
+        $data['ques'] = $row['ques'];
+        $data['op1'] = $row['op1'];
+        $data['op2'] = $row['op2'];
+        $data['op3'] = $row['op3'];
+        $data['op4'] = $row['op4'];
         return $data;
     }
-       public function checkPoll() {
+
+    public function checkPoll() {
         $result = $this->db->query("select poll from login where email ='" . $_SESSION['email'] . "'");
-        $data['poll']=$result->row()->poll;
+        $data['poll'] = $result->row()->poll;
         return $data;
     }
 
     public function addVote($data) {
         //what are x,y,z ??
-        $setPollId = 2;
         $x = $data['vote'];
         $y = $data['z'];
         $new = "poll_c" . $x;

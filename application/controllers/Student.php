@@ -53,8 +53,8 @@ class Student extends CI_Controller {
             show_404();
         }
         $data['category'] = $this->Student_model->getData();
-        $data['pollcheck']=$this->Student_model->checkPoll();
-          $data['query']=$this->Student_model->getPoll();
+        $data['pollcheck'] = $this->Student_model->checkPoll();
+        $data['query'] = $this->Student_model->getPoll();
         $data['title'] = ucfirst('Add Complaint'); // Capitalize the first letter
         //print_r($data);
         $this->load->view('templates/user_header', $data);
@@ -141,7 +141,6 @@ class Student extends CI_Controller {
         $this->load->view('templates/user_header', $data);
         $this->load->view('student/' . $page, $data);
     }
-    
 
     public function popup() {
         $_SESSION['compid'] = $this->input->post('send');
@@ -188,8 +187,8 @@ class Student extends CI_Controller {
         $data['vote'] = $this->string_validate($this->input->get('vote'));
         $data['z'] = $this->input->get('z');
         $y = $data['z'];
-            $this->Student_model->addVote($data);
-            $_SESSION['msg'] = "You have successfully cast your vote.";
+        $this->Student_model->addVote($data);
+        $_SESSION['msg'] = "You have successfully cast your vote.";
         echo $_SESSION['msg'];
     }
 
@@ -217,7 +216,6 @@ class Student extends CI_Controller {
                     $_SESSION['passerr'] = '';
                     $salt = "thispasswordcannotbehacked";
                     $pass = hash('sha256', $salt . $pass);
-
                     $this->Student_model->updatePro($pass);
                 } else
                     $_SESSION['passerr'] = "Password is not valid. ";
