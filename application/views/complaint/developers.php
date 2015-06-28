@@ -17,6 +17,19 @@
 
         </div>
 
+        <div class="6u" style="">
+
+            <section class="box special" >
+                <span class="image featured" style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/iv.jpg" alt=""  /></center></span>
+                <h3><span class="label">Iman Singh Virk</span></a></h3>
+
+                <h4>Mobile : 9872079922</h4>
+                <h4>Email : virk.iman@gmail.com</h4>
+
+
+            </section>
+
+        </div>
         <div class="6u" >
 
             <section class="box special" >
