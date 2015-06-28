@@ -124,7 +124,7 @@
         }
     </script>
 <?php } ?>
-<script src="<?php echo base_url(); ?>public/js/minified/student.js"></script>
+<script src="<?php echo base_url(); ?>public/js/student.js"></script>
 <script>
         $(document).ready(function() {
             // Initialize the plugin

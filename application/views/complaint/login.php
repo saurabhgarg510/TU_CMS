@@ -1,4 +1,4 @@
-<script src="<?php echo base_url(); ?>public/js/minified/login_js.js"></script>
+<script src="<?php echo base_url(); ?>public/js/login_js.js"></script>
 
 <!-- Main -->
 <section id="main" class="container 75%" >

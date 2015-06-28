@@ -2,11 +2,11 @@
 require_once(APPPATH . "libraries/functions.php");
 ?>       
 <script src="<?php echo base_url(); ?>public/js/print.js" defer></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>public/js/minified/jquery.tablesorter.js" defer></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>public/js/jquery.tablesorter.js" defer></script>
 <script type="text/javascript" defer>$(function() {
         $('#keywords').tablesorter({debug: true});
     });</script>
-<script src="<?php echo base_url(); ?>public/js/minified/complaint_ct.js" type="text/javascript" defer></script>
+<script src="<?php echo base_url(); ?>public/js/complaint_ct.js" type="text/javascript" defer></script>
 
 <section id="main" class="container " >
     <form action="<?php echo base_url(); ?>index.php/admin/filter" method="get" id="form">
