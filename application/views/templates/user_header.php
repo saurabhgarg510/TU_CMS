@@ -18,6 +18,7 @@
         <script src="<?php echo base_url(); ?>public/js/minified/skel.min.js" defer></script>
         <script src="<?php echo base_url(); ?>public/js/minified/skel-layers.min.js" defer></script>
         <script src="<?php echo base_url(); ?>public/js/minified/init.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" ></script>        
         <style>
             html, body {
                 max-width: 100%;
@@ -40,7 +41,7 @@
                         if (!isset($_SESSION['id']))
                             header('location:home');
                         ?>
-                        <a href="" class="icon fa-angle-down"><?php echo $_SESSION['name']; ?></a>
+                        <a href="" class="icon fa-angle-down"><?php echo ucfirst($_SESSION['name']); ?></a>
                         <ul><?php if ($_SESSION['user_type'] == 'student') { ?>
                                 <li><a href="<?php echo base_url(); ?>index.php/student">New Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/student/status">View Status</a></li>
@@ -52,14 +53,16 @@
                                 <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
-<?php } else if ($_SESSION['user_type'] == 'warden') { ?>
+                            <?php } else if ($_SESSION['user_type'] == 'warden') { ?>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/add_category">Add Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/del_category">Delete Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/clean_database">Clear Database</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/newpoll">Poll</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/pollresult">PollResults</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
-<?php } ?>
+                            <?php } ?>
                         </ul>
                     </li>
                 </ul>

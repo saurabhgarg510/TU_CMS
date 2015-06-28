@@ -207,8 +207,6 @@ require_once(APPPATH . "libraries/functions.php");
 </div>
 </center>
 </section>
-<!-- Include jQuery Popup Overlay -->
-<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize the plugin

@@ -124,6 +124,38 @@ class Student_model extends CI_Model {
         return 'SUCCESS';
     }
 
+    public function getPoll() {
+        $query = "select * from newpoll where switch=1";
+        $result = $this->db->query($query);
+        $row = $result->row_array();
+        $data['id'] = $row['id'];
+        $data['ques'] = $row['ques'];
+        $data['op1'] = $row['op1'];
+        $data['op2'] = $row['op2'];
+        $data['op3'] = $row['op3'];
+        $data['op4'] = $row['op4'];
+        return $data;
+    }
+
+    public function checkPoll() {
+        $result = $this->db->query("select poll from login where email ='" . $_SESSION['email'] . "'");
+        $data['poll'] = $result->row()->poll;
+        return $data;
+    }
+
+    public function addVote($data) {
+        //what are x,y,z ??
+        $x = $data['vote'];
+        $y = $data['z'];
+        $new = "poll_c" . $x;
+        $sql = "update newpoll set $new=$new+1 where id='" . $y . "'";
+        $this->db->query($sql);
+        $sqlpoll = "update login set poll=1 where email ='" . $_SESSION['email'] . "'";
+        $this->db->query($sqlpoll);
+        $expire = time() + 60 * 60 * 24 * 30;
+        setcookie("poll" . "_" . $y, "poll" . "_" . $y, $expire);
+    }
+
 }
 
 ?>

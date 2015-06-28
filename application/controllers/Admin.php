@@ -47,12 +47,14 @@ class Admin extends CI_Controller {
         return $date;
     }
 
-    function string_validate($str) {
+    public function string_validate($str) {
         $str = filter_var($str, FILTER_SANITIZE_STRING);
         $str1 = str_replace("%", "p", "$str");
-        return $this->db->escape($str1);
+        /* @var $mysqli type */
+        $str1 = $this->db->escape($str1);
+        return str_replace("'", "", $str1);
     }
-    
+
     function valid_pass($candidate) {
         if (!preg_match_all('$\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[\d])\S*$', $candidate))
             return FALSE;
@@ -125,17 +127,17 @@ class Admin extends CI_Controller {
     }
 
     public function resetFilters() {
-	$temp=$_SESSION['fcat'];
-        unset($_SESSION['fcat'],$temp);
-	$temp=$_SESSION['fwing'];
-        unset($_SESSION['fwing'],$temp);
-	$temp=$_SESSION['fstat'];
-        unset($_SESSION['fstat'],$temp);
-	$temp=$_SESSION['f_sdate'];
-        unset($_SESSION['f_sdate'],$temp);
-	$temp=$_SESSION['f_edate'];
-        unset($_SESSION['f_edate'],$temp);
-        redirect(base_url().'index.php/admin');
+        $temp = $_SESSION['fcat'];
+        unset($_SESSION['fcat'], $temp);
+        $temp = $_SESSION['fwing'];
+        unset($_SESSION['fwing'], $temp);
+        $temp = $_SESSION['fstat'];
+        unset($_SESSION['fstat'], $temp);
+        $temp = $_SESSION['f_sdate'];
+        unset($_SESSION['f_sdate'], $temp);
+        $temp = $_SESSION['f_edate'];
+        unset($_SESSION['f_edate'], $temp);
+        redirect(base_url() . 'index.php/admin');
     }
 
     public function popup() {
@@ -156,6 +158,61 @@ class Admin extends CI_Controller {
             show_404();
         }
         $data['title'] = 'Add Category';
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('admin/' . $page, $data);
+        $this->load->view('templates/footer');
+        unset($_SESSION['stmt']);
+    }
+
+    public function newpoll($page = 'poll') {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+        $data['title'] = 'New Poll';
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('admin/' . $page, $data);
+        $this->load->view('templates/footer');
+        unset($_SESSION['flag']);
+        unset($_SESSION['queserr']);
+    }
+
+    public function pollresult($page = 'poll_result') {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+        $data['title'] = 'Poll Results';
+        $data['query'] = $this->Admin_model->pollresquery();
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('admin/' . $page, $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function pollinsert() {
+        $data['ques'] = $this->string_validate($this->input->post('ques'));
+        $data['op1'] = $this->string_validate($this->input->post('op1'));
+        $data['op2'] = $this->string_validate($this->input->post('op2'));
+        $data['op3'] = $this->string_validate($this->input->post('op3'));
+        $data['op4'] = $this->string_validate($this->input->post('op4'));
+        if ($data['ques'] == '' || $data['op1'] == '' || $data['op2'] == '')
+            $_SESSION['queserr'] = 'Question, Option 1 and Option 2 are mandatory';
+        else {
+            $newdata = $this->Admin_model->pollinsertquery($data);
+            $_SESSION['flag'] = 1;
+        }
+        redirect(base_url() . 'index.php/admin/newpoll');
+    }
+
+    public function pollgraph($page = 'poll_result1') {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+        $data['title'] = 'poll_result1';
+        $data['id'] = $this->input->get('z');
+        $data = $this->Admin_model->pollresquery1($data);
+        //	print_r($data);
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
@@ -223,6 +280,7 @@ class Admin extends CI_Controller {
         unset($_SESSION['matcherr']);
         unset($_SESSION['passerr']);
         unset($_SESSION['olderr']);
+        unset($_SESSION['success']);
     }
 
     public function updateProfile() {
