@@ -19,7 +19,7 @@ if (isset($_SESSION['stmt'])) {
     $c = $_COOKIE['count'];
     $c += 1;
     setcookie('count', $c, time() + (28800), "/");
-    if ($c > 2) {
+    if ($c > 4) {
         ?>
         <script type="text/javascript">
             spam_alert();
@@ -30,16 +30,16 @@ if (isset($_SESSION['stmt'])) {
     ?>
 
     <!-- Main -->
-    <section id="main" class="container small" style="padding: 0">
-        <header style="padding: 0">
-            <h2 style="padding: 0">Contact Us</h2>
-            <p style="padding: 0">
+    <section id="main" class="container 75%">
+        <header >
+            <h2>Contact Us</h2>
+            <p>
                 <?php
                 echo "Hi " . $_SESSION['nm'] . ", we have received your message";
             } else {
-                echo '<section id="main" class="container small" style="padding: 0">
-        <header style="padding: 0">
-            <h2 style="padding: 0">Contact Us</h2>
+                echo '<section id="main" class="container 75%" >
+        <header >
+            <h2 >Contact Us</h2>
             <p style="padding: 0">';
                 echo "Tell us what you think about our little operation. ";
             }
@@ -58,7 +58,7 @@ if (isset($_SESSION['stmt'])) {
 
             <div class="row uniform half">
                 <div class="12u">
-                    <textarea name="message" id="message" placeholder="Enter your message" rows="6" required title="Enter your message/feedback"></textarea>
+                    <textarea name="message" id="message" placeholder="Enter your message" rows="6" required style="resize: vertical" title="Enter your message/feedback"></textarea>
                 </div>
             </div>
             <div class="row uniform">

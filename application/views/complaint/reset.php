@@ -1,4 +1,4 @@
-<section class="container small">
+<section id="main" class="container 75%">
     <div class="box">
         <div id="type">
             <center>

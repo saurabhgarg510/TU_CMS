@@ -19,7 +19,7 @@
     }
 </script>
 </head>
-<section id="main" class="container small" >
+<section id="main" class="container 50%" >
     <header>
         <h3 style="margin-bottom:0px;">Clean Database</h3>
     </header>

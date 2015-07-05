@@ -18,46 +18,47 @@ if ($go == '') {
 }
 if ($complaint['count'] > 0) {
     ?>
-    <section class="box" id="print">
-        <div class="table-wrapper">
-            <center><h2 >Complaints similar to yours were found</h2></center>
-            <table id="keywords" class="tablesorter" >
-                <thead>
-                    <tr>
-                       <!-- <th><input type="checkbox" id="all"><label></label> </th>-->
-                        <th>Complaint Id</th>
-                        <th>Category</th>
-                        <th>Room No</th>
-                        <th>Details</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($complaint as $row) {
-                        ?>
+<section id="main" class="container">
+        <div class="box">
+            <div class="table-wrapper">
+                <center><h2 >Complaints similar to yours were found</h2></center>
+                <table id="keywords" class="tablesorter" >
+                    <thead>
                         <tr>
-                            <td><?php echo $row['comp_id']; ?></td>
-                            <td><?php echo $row['category']; ?></td>
-                            <td><?php echo $row['roomno']; ?></td>
-                            <td><?php echo $row['details']; ?></td>
-                            <td><?php echo $row['comp_date']; ?></td>
-                            <td><?php
-                                if ($row['status'] == 'Pending')
-                                    echo "<b style='color:blue' >" . $row['status'] . "</b>";
-                                else if ($row['status'] == 'Complete')
-                                    echo "<b style='color:green'>" . $row['status'] . "</b>";
-                                else if ($row['status'] == 'Urgent')
-                                    echo "<b style='color:red'>" . $row['status'] . "</b>";
-                                else
-                                    echo $row['status'];
-                                ?></td>
+                           <!-- <th><input type="checkbox" id="all"><label></label> </th>-->
+                            <th>Complaint Id</th>
+                            <th>Category</th>
+                            <th>Room No</th>
+                            <th>Details</th>
+                            <th>Date</th>
+                            <th>Status</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($complaint as $row) {
+                            ?>
+                            <tr>
+                                <td><?php echo $row['comp_id']; ?></td>
+                                <td><?php echo $row['category']; ?></td>
+                                <td><?php echo $row['roomno']; ?></td>
+                                <td><?php echo $row['details']; ?></td>
+                                <td><?php echo $row['comp_date']; ?></td>
+                                <td><?php
+                                    if ($row['status'] == 'Pending')
+                                        echo "<b style='color:blue' >" . $row['status'] . "</b>";
+                                    else if ($row['status'] == 'Complete')
+                                        echo "<b style='color:green'>" . $row['status'] . "</b>";
+                                    else if ($row['status'] == 'Urgent')
+                                        echo "<b style='color:red'>" . $row['status'] . "</b>";
+                                    else
+                                        echo $row['status'];
+                                    ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         <form action="<?php echo base_url(); ?>index.php/student/addComp" method="post" >
             <center><ul class="actions">
                     <li><input type="hidden" value="go" name="go"/></li>
@@ -67,6 +68,7 @@ if ($complaint['count'] > 0) {
                 <b><p style="color:red">Warning : Do not submit the same cluster complaint if it has already been registered. </p></b>
             </center>
         </form>
+        </div>
     </section>
     <?php
 }

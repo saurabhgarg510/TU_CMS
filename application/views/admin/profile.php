@@ -1,5 +1,5 @@
 <!-- Main -->
-<section id="main" class="container small">
+<section id="main" class="container 75%">
     <header>
         <h2>Change password</h2>
         <div ><button class="fadeandscale_open " id="pop" style="display: none">pop</button></div>
@@ -13,6 +13,7 @@
                 </div>
             </div>
         </div>
+
     </header>
     <div class="box">
         <form method="post" action="<?php echo base_url(); ?>index.php/admin/updateProfile">
@@ -35,20 +36,20 @@
                 <div class="12u">
                     <input type="password" name="oldpass" id="oldpass" placeholder="Enter old password" required />
                 </div>
-                <span class="error"><?php if (isset($_SESSION['olderr'])) echo $_SESSION['olderr']; ?> </span>
+                <span class="error" style="padding-top: 0"><?php if (isset($_SESSION['olderr'])) echo $_SESSION['olderr']; ?> </span>
             </div>
 
-            <div class="row uniform half">
-                <div class="12u">
+            <div class="row uniform half" >
+                <div class="12u" >
                     <input type="password" name="pass" id="pass" placeholder="Enter new password" maxlength="20"  onkeyup="return passwordChanged('pass');"  required />
                 </div>
-                <span class="error"><?php if (isset($_SESSION['passerr'])) echo $_SESSION['passerr']; ?> Password : atleast 1 number, 1 lowercase alphabet and minimum length is 6</span>
+                <span class="error" style="padding-top: 0"><?php if (isset($_SESSION['passerr'])) echo $_SESSION['passerr']; ?> Password : atleast 1 number, 1 lowercase alphabet and minimum length is 6</span>
             </div>
             <div class="row uniform half">
-                <div class="12u">
+                <div class="12u" style="padding-top: 0">
                     <input type="password" name="repass" id="repass" placeholder="Confirm password" maxlength="20" onkeyup="return passwordChanged('repass');" required />
                 </div>
-                <span class="error"><?php if (isset($_SESSION['matcherr'])) echo $_SESSION['matcherr']; ?> </span>
+                <span class="error" style="padding-top: 0"><?php if (isset($_SESSION['matcherr'])) echo $_SESSION['matcherr']; ?> </span>
             </div>
 
             <div class="row uniform">
@@ -61,15 +62,14 @@
         </form>
     </div>
 </section>
-<script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" ></script>
 <script >
-                        $(document).ready(function() {
-                            // Initialize the plugin
-                            $('#fadeandscale').popup();
-                            transition: 'all 0.3s'
-                        });
+    $(document).ready(function() {
+        // Initialize the plugin
+        $('#fadeandscale').popup();
+        transition: 'all 0.3s'
+    });
 </script>
-<script language="javascript">
+<script language="javascript" defer>
     function passwordChanged(id) {
         var strength = document.getElementById(id);
         var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&*]).*$", "g");
@@ -85,9 +85,10 @@
         }
     }
 </script>
+
 <?php
 if (isset($_SESSION['success'])) {
-    echo "<script>$(document).ready(function() {
+                            echo "<script>$(document).ready(function() {
         $('#pop').trigger('click');
     });</script>";
 }

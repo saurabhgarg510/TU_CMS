@@ -9,14 +9,14 @@
         <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff"  />
         <meta http-equiv="Cache-control" content="no-store">
         <meta http-equiv="Content-Security-Policy" content="script-src 'self' http://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval'" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/skel.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style.css" />
-        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/minified/style-wide.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/main.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/strength.css" />
         <script src="<?php echo base_url(); ?>public/js/jquery.min.js"></script>
         <script src="<?php echo base_url(); ?>public/js/jquery.dropotron.min.js" defer></script>
-        <script src="<?php echo base_url(); ?>public/js/minified/skel.min.js" defer></script>
-        <script src="<?php echo base_url(); ?>public/js/minified/skel-layers.min.js" defer></script>
-        <script src="<?php echo base_url(); ?>public/js/minified/init.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/skel.min.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/main.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/util.js" defer></script>
+        <script src="<?php echo base_url(); ?>public/js/jquery.popupoverlay.js" ></script>
         
         <style>
             html, body {
