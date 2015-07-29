@@ -11,8 +11,10 @@ class Admin_model extends CI_Model {
     }
 
     public function deleteComplaints($type) {
-        if ($type == 'all')
+        if ($type == 'all'){
+            $this->db->query('truncate remarks');
             $this->db->query('truncate complaints');
+        }            
         else
             $this->db->query("delete from complaints where status='Complete'");
     }
@@ -153,6 +155,21 @@ class Admin_model extends CI_Model {
 
     function addRemark($sql) {
         $this->db->query($sql);
+    }
+    
+    function searchStudent($room){
+        $result=  $this->db->query("select * from student_details where room_no='".$room."'");
+        $row = $result->row_array();
+        return $row;
+    }
+    
+    function searchStudentName($name) {
+        $result=  $this->db->query("select * from student_details where full_name like '%".$name."%'");
+        $details = array();
+        foreach ($result->result_array() as $row) {
+            array_push($details, $row);
+        }
+        return $details;
     }
 
 }

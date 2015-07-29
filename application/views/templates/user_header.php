@@ -48,11 +48,15 @@
                                 <?php
                             } else if ($_SESSION['user_type'] == 'caretaker') {
                                 ?>
-                                <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>     
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/search">Search Student</a></li>                           
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/newpoll">Create New Poll</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/pollresult">Poll Results</a></li>                                
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/complaint/logout">Logout</a></li>
                             <?php } else if ($_SESSION['user_type'] == 'warden') { ?>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/search">Search Student</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/add_category">Add Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/del_category">Delete Complaint Type</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/clean_database">Clear Database</a></li>

@@ -1,4 +1,3 @@
-
 <section id="main" class="container" >
     <h1 style="text-align:center; font-size:60px">The Team</h1><br>
     <div class="row" >
@@ -10,28 +9,14 @@
                     <li><a href="https://facebook.com/saurav.garg2/" class="icon fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
                     <li><a href="https://instagram.com/saurabh_grg/" class="icon fa-instagram" target="_blank"><span class="label" target="_blank" >Instagram</span></a></li>
                     <li><a href="https://github.com/saurabhgarg510/" class="icon fa-github" target="_blank"><span class="label" target="_blank" >Github</span></a></li>
-                    <li><a href="https://plus.google.com/saurabhgarg5/" class="icon fa-google-plus" target="_blank" ><span class="label">Google+</span></a></li>
+                    <li><a href="https://plus.google.com/+saurabhgarg5/" class="icon fa-google-plus" target="_blank" ><span class="label">Google+</span></a></li>
                 </ul>
                 <h4>Mobile : 9041544335</h4>
                 <h4>Email : saurabhgarg510@gmail.com</h4>                
             </section>
         </div>
         
-        <div class="6u" style="margin-bottom: 5px;">
-            <section class="box special" >
-                <span class="image " style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/iv.jpg" alt=""  /></center></span>
-                <h3><span class="label">Iman Singh Virk</span></a></h3>
-                <ul class="icons">
-                    <li><a href="https://www.facebook.com/saurav.garg2/" class="icon fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon fa-instagram"><span class="label" target="_blank" >Instagram</span></a></li>
-                    <li><a href="#" class="icon fa-github"><span class="label" target="_blank" >Github</span></a></li>
-                    <li><a href="https://www.plus.google.com/saurabhgarg5/" class="icon fa-google-plus" target="_blank" ><span class="label">Google+</span></a></li>
-                </ul>
-                <h4>Mobile : 9872079922</h4>
-                <h4>Email : virk.iman@gmail.com</h4>
-            </section>
-        </div>
-
+        
         <div class="6u" style="margin-bottom: 5px;">
             <section class="box special" >
                 <span class="image "  style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/shivi.jpg" alt=""  /></center></span>
@@ -85,5 +70,18 @@
                 <h4>Email  :  vivek@onlinehostelj.in</h4>
             </section>
         </div>
+<div class="6u" style="margin-bottom: 5px;">
+            <section class="box special" >
+                <span class="image " style="margin-top:-20px; margin-left:5px"><center><img src="<?php echo base_url(); ?>public/images/iv.jpg" alt=""  /></center></span>
+                <h3><span class="label">Iman Singh Virk</span></a></h3>
+                <ul class="icons">
+                    <li><a href="https://www.facebook.com/iman.virk" class="icon fa-facebook" target="_blank" ><span class="label">Facebook</span></a></li>
+                    <li><a href="https://instagram.com/virk_iman/" class="icon fa-instagram"><span class="label" target="_blank" >Instagram</span></a></li>                  
+                </ul>
+                <h4>Mobile : 9872079922</h4>
+                <h4>Email : virk.iman@gmail.com</h4>
+            </section>
+        </div>
+
     </div>
 </section>

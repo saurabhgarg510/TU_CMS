@@ -7,7 +7,10 @@
         </marquee>
 
         <b><h2>Online Hostel J</h2></b><br>
-        <p><font color="blue"></font></p>
+        <p><font color="blue">
+        <!-- Main Notice -->
+        Logins are disabled and will start soon. 
+        </font></p>
         <ul class="actions">
             <li><a href="<?php echo base_url(); ?>index.php/complaint/sign_in" class="button special">Sign In (For Complaints)</a>&nbsp &nbsp 
                 <a href="http://tuckshop.onlinehostelj.in" class="button special" target="_blank">Hostel J Tuck Shop</a>&nbsp &nbsp
