@@ -267,6 +267,28 @@ class Admin extends CI_Controller {
         redirect(base_url() . 'index.php/admin/clean_database');
     }
 
+    public function search($page = 'search') {
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+            // Whoops, we don't have a page for that!
+            show_404();
+        }
+        $data['title'] = ucfirst($page);
+        if(isset($_POST['name'])){
+            $name= $this->string_validate($_POST['name']);
+            $data['name']=TRUE;
+            $data['row']=  $this->Admin_model->searchStudentName($name);
+        }
+        $room=$this->input->post('room');
+        if($room!=""){
+            $room=  $this->string_validate($_POST['room']);
+            $data['room']=TRUE;
+            $data['details']=  $this->Admin_model->searchStudent($room);
+        }
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('admin/' . $page, $data);
+        $this->load->view('templates/footer');
+    }
+
     public function profile($page = 'profile') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
             // Whoops, we don't have a page for that!
