@@ -13,8 +13,8 @@
                     <ol>
                         <li><?php echo $ro['op1'] ?></li>
                         <li><?php echo $ro['op2'] ?></li>
-                        <li><?php echo $ro['op3'] ?></li>
-                        <li><?php echo $ro['op4'] ?></li>
+                        <?php if($ro['op3']!='NULL') echo "<li>".$ro['op3']."</li>" ?>
+                        <?php if($ro['op4']!='NULL') echo "<li>".$ro['op4']."</li>" ?>
                     </ol>
                     <button class="fadeandscale_open button special" onclick=" show('<?php echo $ro['ques'] ?>', '<?php echo $ro['op1'] ?>', '<?php echo $ro['op2'] ?>', '<?php echo $ro['op3'] ?>', '<?php echo $ro['op4'] ?>',<?php echo $ro['poll_c1'] ?>,<?php echo $ro['poll_c2'] ?>,<?php echo $ro['poll_c3'] ?>,<?php echo $ro['poll_c4'] ?>)"> Show Result</button>
                 </section>

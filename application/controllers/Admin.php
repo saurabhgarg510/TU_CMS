@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 
     public function index($page = 'warden') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
 
@@ -107,9 +107,9 @@ class Admin extends CI_Controller {
         } else if ($sql == 'select * from complaints where ') {
             $sql = 'select * from complaints  where status <>"Complete" ';
         }
-        //echo $sql;
+//echo $sql;
         $data['row'] = $this->Admin_model->filteredContent($sql);
-        //print_r($data);
+//print_r($data);
         $data['category'] = $this->Admin_model->getCategory();
         $title['title'] = ucfirst('View Complaints'); // Capitalize the first letter
         $this->load->view('templates/user_header', $title);
@@ -154,7 +154,7 @@ class Admin extends CI_Controller {
 
     public function add_category($page = 'addnew') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'Add Category';
@@ -166,7 +166,7 @@ class Admin extends CI_Controller {
 
     public function newpoll($page = 'poll') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'New Poll';
@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
 
     public function pollresult($page = 'poll_result') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'Poll Results';
@@ -206,13 +206,13 @@ class Admin extends CI_Controller {
 
     public function pollgraph($page = 'poll_result1') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'poll_result1';
         $data['id'] = $this->input->get('z');
         $data = $this->Admin_model->pollresquery1($data);
-        //	print_r($data);
+//	print_r($data);
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
@@ -228,12 +228,12 @@ class Admin extends CI_Controller {
 
     public function del_category($page = 'delete') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = 'Delete Category';
         $data['category'] = $this->Admin_model->getCategory();
-        //	print_r($data);
+//	print_r($data);
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
         $this->load->view('templates/footer');
@@ -242,7 +242,7 @@ class Admin extends CI_Controller {
 
     public function deleteCategory() {
         $data = $this->input->get();
-        //print_r($data);
+//print_r($data);
         $cat = $data['category'];
         $this->Admin_model->deleteCat($cat);
         $_SESSION['stmt'] = TRUE;
@@ -251,7 +251,7 @@ class Admin extends CI_Controller {
 
     public function clean_database($page = 'clean') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = ucfirst($page); // Capitalize the first letter
@@ -262,27 +262,27 @@ class Admin extends CI_Controller {
 
     public function deleteComplaints() {
         $type = $this->input->post('clean');
-        //print_r($type);        
+//print_r($type);        
         $this->Admin_model->deleteComplaints($type);
         redirect(base_url() . 'index.php/admin/clean_database');
     }
 
     public function search($page = 'search') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data['title'] = ucfirst($page);
-        if(isset($_POST['name'])){
-            $name= $this->string_validate($_POST['name']);
-            $data['name']=TRUE;
-            $data['row']=  $this->Admin_model->searchStudentName($name);
+        if (isset($_POST['name'])) {
+            $name = $this->string_validate($_POST['name']);
+            $data['name'] = TRUE;
+            $data['row'] = $this->Admin_model->searchStudentName($name);
         }
-        $room=$this->input->post('room');
-        if($room!=""){
-            $room=  $this->string_validate($_POST['room']);
-            $data['room']=TRUE;
-            $data['details']=  $this->Admin_model->searchStudent($room);
+        $room = $this->input->post('room');
+        if ($room != "") {
+            $room = $this->string_validate($_POST['room']);
+            $data['room'] = TRUE;
+            $data['details'] = $this->Admin_model->searchStudent($room);
         }
         $this->load->view('templates/user_header', $data);
         $this->load->view('admin/' . $page, $data);
@@ -291,7 +291,7 @@ class Admin extends CI_Controller {
 
     public function profile($page = 'profile') {
         if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
-            // Whoops, we don't have a page for that!
+// Whoops, we don't have a page for that!
             show_404();
         }
         $data = $this->Admin_model->getProfile();
@@ -340,14 +340,35 @@ class Admin extends CI_Controller {
     }
 
     public function updateRemark() {
-        //
+//
         $user = $_SESSION['compid'];
-        //print_r($user);
+        $email = $this->Admin_model->getUserEmail($user);
+        
+//print_r($email);
         if ($_POST['remark'] != '') {
             $remark = $this->string_validate($_POST['remark']);
             $remark = str_replace("'", '', $remark);
             $sql = "insert into remarks(remark,comp_id,user_type,time) values('" . $remark . "','" . $user . "' ,'" . ucfirst($_SESSION['user_type']) . "','" . date('Y-m-d H:i:s') . "')";
             $this->Admin_model->addRemark($sql);
+            $subject = "New remark added to your complaint";
+            $message = "<html>
+<head>
+<title>Hostel-J</title>
+</head>
+<body>
+<p>Hi,<br>
+Following remark has been added by ".$_SESSION['user_type']." on your Complaint.<br><br><q>".$remark."</q>
+<br>
+<br>
+This is a system generated email. Donot reply to this email.<br>
+</b>
+</body>
+</html>";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers.="From:Hostel-J<developer@onlinehostelj.in>";
+            mail($email, $subject, $message, $headers); 
+            
         }
         if ($_POST['status'] != '') {
             $sql = "update complaints set status = '" . $_POST['status'] . "' where comp_id = " . $_SESSION['compid'];
@@ -357,10 +378,172 @@ class Admin extends CI_Controller {
                 $sql = "update complaints set exp_date = '" . $cdate . "' where comp_id = " . $_SESSION['compid'];
                 $this->Admin_model->addRemark($sql);
             }
+            $subject = "Complaint status updated";
+            $message = "<html>
+<head>
+<title>Hostel-J</title>
+</head>
+<body>
+<p>Hi,<br>
+Your complaint status has been updated to ".$_POST['status']." by ".$_SESSION['user_type'].".<br><br>
+<br>
+<br>
+This is a system generated email. Donot reply to this email.<br>
+</b>
+</body>
+</html>";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers.="From:Hostel-J<developer@onlinehostelj.in>";
+            mail($email, $subject, $message, $headers); 
         }
         redirect(base_url() . 'index.php/admin');
     }
 
-}
+    function generate_password() {
+        $alpha = "abcdefghijklmnopqrstuvwxyz";
+        $alpha_upper = strtoupper($alpha);
+        $numeric = "0123456789";
+        $special = ".-+=_,!@$#*%<>[]{}";
+        $chars = "";
+        $alpha_small = 'on';
+        $alpha_cap = 'off';
+        $num = 'on';
+        $special_char = 'off';
+// if you want a form like above
+        if ($alpha_small == 'on')
+            $chars .= $alpha;
 
-?>
+        if ($alpha_cap == 'on')
+            $chars .= $alpha_upper;
+
+        if ($num == 'on')
+            $chars .= $numeric;
+
+        if ($special_char == 'on')
+            $chars .= $special;
+        $length = 6;
+// default [a-zA-Z0-9]{9}
+        $len = strlen($chars);
+        $pw = '';
+        for ($i = 0; $i < $length; $i++)
+            $pw .= substr($chars, rand(0, $len - 1), 1);
+// the finished password
+        $pw = str_shuffle($pw);
+        return $pw;
+    }
+
+    function sendmail($email) {
+   /*     $data = $this->Admin_model->getMailData();
+        $existing = $this->Admin_model->getExistingData();
+        $result=array_diff_key($data,$existing);
+        $i=0;
+        foreach ($result as $row) {
+        if($row['email']== 'wardenj@thapar.edu' || $row['email']=='caretaker1@onlinehostelj.in' || $row['email']=='caretaker2@onlinehostelj.in' ||  $row['email']=='imcool.saurabh@gmail.com') continue; */
+        
+            echo $i." ". $email."<br>";
+            $i++;
+            
+            $salt = "thispasswordcannotbehacked";
+            $password = $this->generate_password();
+            $pass = hash('sha256', $salt . $password);
+            $this->Admin_model->insertLogin($email, $pass);
+ //           $to = $row['email'];
+            $subject = "Registration at onlinehostelj.in";
+            $message = "<html>
+<head>
+<title>Registration Email</title>
+</head>
+<body>
+<p>Hi,<br>
+We have updated some features.<br>
+Now you will be getting emails once your complaint status has been updated or a remark has been posted on your complaint.<br><br>
+These are your new Login credentials.
+Change this password after your first login.<br>
+<br>
+<pre>
+<b>Username :  </b>" . $email . "<br>
+<b>Password :  </b>" . $password . "
+<br>
+</pre>
+http://onlinehostelj.in/
+<br><br>
+This is a system generated email. Donot reply to this email.<br>
+</b>
+</body>
+</html>";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers.="From:Hostel-J<developer@onlinehostelj.in>";
+            mail($email, $subject, $message, $headers); 
+ //       }
+    }
+
+function registermail($email) {    
+            $salt = "thispasswordcannotbehacked";
+            $password = $this->generate_password();
+            $pass = hash('sha256', $salt . $password);
+            $this->Admin_model->insertLogin($email, $pass);
+            $subject = "Registration at onlinehostelj.in";
+            $message = "<html>
+<head>
+<title>Registration Email</title>
+</head>
+<body>
+<p>Hi,<br>
+You have been registered.<br>
+These are your new Login credentials.
+Change this password after your first login.<br>
+<br>
+<pre>
+<b>Username :  </b>" . $email . "<br>
+<b>Password :  </b>" . $password . "
+<br>
+</pre>
+http://onlinehostelj.in/
+<br><br>
+This is a system generated email. Donot reply to this email.<br>
+</b>
+</body>
+</html>";
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers.="From:Hostel-J<developer@onlinehostelj.in>";
+            mail($email, $subject, $message, $headers); 
+    }
+    
+    public function register($page='register'){
+        if (!file_exists(APPPATH . '/views/admin/' . $page . '.php')) {
+            show_404();
+        }
+        $data['title'] = 'Register';
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('admin/' . $page, $data);
+        $this->load->view('templates/footer');
+    }
+    
+    function registration(){
+    	$name=$this->input->post('name');
+    	$roll=$this->input->post('roll');
+    	$email=$this->input->post('email');
+    	$contact=$this->input->post('contact');
+    	$room=$this->input->post('room');   
+        $emailerr=$this->Admin_model->checkEmail($email);
+        $roomerr=$this->Admin_model->checkRoom($room);
+        if($emailerr) {
+            $_SESSION['emailerr']=TRUE;
+            redirect(base_url() . 'index.php/admin/register');
+        }
+        else if($roomerr) {
+            $_SESSION['roomerr']=TRUE;
+            redirect(base_url() . 'index.php/admin/register');
+        }
+        else{
+            $this->Admin_model->insertRegistration($name,$roll,$email,$contact,$room);
+            $this->registermail($email);
+            $_SESSION['stmt']=TRUE;
+            redirect(base_url() . 'index.php/admin/register');
+        }    
+    }
+
+}

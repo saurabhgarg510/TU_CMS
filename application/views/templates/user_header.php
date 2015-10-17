@@ -49,7 +49,8 @@
                             } else if ($_SESSION['user_type'] == 'caretaker') {
                                 ?>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin">Complaints</a></li>     
-                                <li><a href="<?php echo base_url(); ?>index.php/admin/search">Search Student</a></li>                           
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/search">Search Student</a></li> 
+                                <li><a href="<?php echo base_url(); ?>index.php/admin/register">New Registration</a></li>                          
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/newpoll">Create New Poll</a></li>
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/pollresult">Poll Results</a></li>                                
                                 <li><a href="<?php echo base_url(); ?>index.php/admin/profile">Account Settings</a></li>

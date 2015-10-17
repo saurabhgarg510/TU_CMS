@@ -54,7 +54,7 @@
 </section>
 <?php if ($pollcheck['poll'] == 0) { ?>
 <div id="fadeandscale" style="">
-        <div id="pollDisplay" class="box">
+        <div id="pollDisplay" class="box" style="width: 50%; margin: auto">
             <form><h3><?php echo $query['ques']; ?>?</h3>
                 <input id="s" name="s" type="hidden" value="<?php echo htmlspecialchars($query['id']); ?>">
                 <input type="radio" name="poll_option" id="1" class="poll_sys" value="1">

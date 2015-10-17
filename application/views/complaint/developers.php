@@ -11,7 +11,7 @@
                     <li><a href="https://github.com/saurabhgarg510/" class="icon fa-github" target="_blank"><span class="label" target="_blank" >Github</span></a></li>
                     <li><a href="https://plus.google.com/+saurabhgarg5/" class="icon fa-google-plus" target="_blank" ><span class="label">Google+</span></a></li>
                 </ul>
-                <h4>Mobile : 9041544335</h4>
+
                 <h4>Email : saurabhgarg510@gmail.com</h4>                
             </section>
         </div>

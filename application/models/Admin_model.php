@@ -12,8 +12,8 @@ class Admin_model extends CI_Model {
 
     public function deleteComplaints($type) {
         if ($type == 'all'){
-            $this->db->query('truncate remarks');
-            $this->db->query('truncate complaints');
+            $this->db->query('delete from remarks where 1');
+            $this->db->query('delete from complaints where 1');
         }            
         else
             $this->db->query("delete from complaints where status='Complete'");
@@ -170,6 +170,52 @@ class Admin_model extends CI_Model {
             array_push($details, $row);
         }
         return $details;
+    }
+    
+    function getMailData() {
+        $sql = "SELECT * FROM registration";
+        $result = $this->db->query($sql);
+        $details = array();
+        foreach ($result->result_array() as $row) {
+            array_push($details, $row);
+        }
+        return $details;
+    }
+    
+    function getUserEmail($comp_id){
+    	$result=$this->db->query("select * from registration where roomno IN (select roomno from complaints where comp_id=".$comp_id.")");
+    	$row = $result->row_array();
+        return $row['email'];    
+    }    
+    
+    function getExistingData() {
+        $sql = "SELECT * FROM login";
+        $result = $this->db->query($sql);
+        $details = array();
+        foreach ($result->result_array() as $row) {
+            array_push($details, $row);
+        }
+        return $details;
+    }
+    
+    function checkEmail($email){
+    	$query=$this->db->query("select email from registration where email='".$email."'");
+    	if ($query->num_rows() > 0) return TRUE;
+    	else return FALSE;
+    }
+    
+    function checkRoom($room){
+    	$query=$this->db->query("select roomno from registration where roomno='".$room."'");
+    	if ($query->num_rows() > 0) return TRUE;
+    	else return FALSE;
+    }
+    
+    function insertLogin($email,$pass){
+        $this->db->query("insert into login(email,pass) values ('".$email."','".$pass."')");
+    }
+    
+    function insertRegistration($name,$roll,$email,$contact,$room){
+        $this->db->query("insert into registration values ('".$name."','".$roll."','".$email."','".$contact."','".$room."','student')");
     }
 
 }

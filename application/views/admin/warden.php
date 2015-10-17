@@ -154,7 +154,7 @@ require_once(APPPATH . "libraries/functions.php");
 
     <!---------------------------------------- POPUP end -------------------------> 
     <div class="box">
-        <h1 style="font-size:32px;text-align:center;margin-top:0px"> Complaints  </h1>
+        <h1 style="font-size:32px;text-align:center;margin-top:0px"> Complaints (<?php echo count($row); ?>) </h1>
         <div class="table-wrapper" id="print">
             <table id="keywords" class="tablesorter" >
                 <thead>
